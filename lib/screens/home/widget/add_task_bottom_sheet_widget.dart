@@ -6,6 +6,7 @@ class AddTaskBottomSheetWidget extends StatelessWidget {
   AddTaskBottomSheetWidget({super.key});
   TextEditingController taskName = TextEditingController();
   TextEditingController taskDescription = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +18,49 @@ class AddTaskBottomSheetWidget extends StatelessWidget {
       height: 300,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            DefaultTextFormField(hintText: "Task Name", controller: taskName),
-            SizedBox(
-              height: 15,
-            ),
-            DefaultTextFormField(
-                hintText: "Task Description", controller: taskDescription),
-            SizedBox(
-              height: 30,
-            ),
-            DefaultSubmitButton(onPressed: () {}, label: "Add Task")
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              DefaultTextFormField(
+                hintText: "Task Name",
+                controller: taskName,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter task name";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              DefaultTextFormField(
+                hintText: "Task Description",
+                controller: taskDescription,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter task description";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              DefaultSubmitButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      addTask();
+                    }
+                  },
+                  label: "Add Task")
+            ],
+          ),
         ),
       ),
     );
   }
+
+  void addTask() {}
 }

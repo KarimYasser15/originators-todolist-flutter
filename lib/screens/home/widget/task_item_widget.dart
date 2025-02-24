@@ -35,7 +35,8 @@ class TaskItemWidget extends StatelessWidget {
                     ),
                     Text(
                       "Task Descriptionsdfvsssssssssssssssssssssssss",
-                      overflow: TextOverflow.fade,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                       style: TextStyle(
                         color: Colors.white,
                       ),

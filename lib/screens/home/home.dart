@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/screens/home/task_provider.dart';
 import 'package:todo_list/screens/home/widget/add_task_bottom_sheet_widget.dart';
 import 'package:todo_list/screens/home/widget/task_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  bool firstTimeToGetTasks = true;
 
   @override
   Widget build(BuildContext context) {
+    TaskProvider taskProvider = Provider.of<TaskProvider>(context);
+    if (firstTimeToGetTasks) {
+      firstTimeToGetTasks = false;
+      taskProvider.getAllTasks();
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
