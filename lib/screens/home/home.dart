@@ -10,10 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TaskProvider taskProvider = Provider.of<TaskProvider>(context);
+    //TaskProvider taskProvider = Provider.of<TaskProvider>(context);
     if (firstTimeToGetTasks) {
       firstTimeToGetTasks = false;
-      taskProvider.getAllTasks();
+      //taskProvider.getAllTasks();
     }
     return Scaffold(
       appBar: AppBar(

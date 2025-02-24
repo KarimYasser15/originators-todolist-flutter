@@ -7,13 +7,19 @@ class DefaultTextFormField extends StatelessWidget {
   TextEditingController? controller;
   bool isPassword;
 
-  DefaultTextFormField(
-      {required this.hintText, required this.controller, this.validator, this.isPassword = false});
+  DefaultTextFormField({
+    required this.hintText,
+    required this.controller,
+    this.validator,
+    this.isPassword = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(hintText: hintText,),
+      decoration: InputDecoration(
+        hintText: hintText,
+      ),
       obscureText: isPassword,
       controller: controller,
       validator: validator,

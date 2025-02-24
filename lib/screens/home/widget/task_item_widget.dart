@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/core/utils/routes_manager.dart';
 
 class TaskItemWidget extends StatelessWidget {
   TaskItemWidget({super.key, this.taskName, this.taskDescription});
@@ -44,14 +45,30 @@ class TaskItemWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              InkWell(
-                child: Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                ),
-                onTap: () {
-                  print("PRESSED");
-                },
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    child: Icon(
+                      Icons.update,
+                      color: Colors.grey,
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, RoutesManager.updateTask);
+                      print("PRESSED");
+                    },
+                  ),
+                  InkWell(
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    onTap: () {
+                      deleteTask();
+                      print("PRESSED");
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -59,4 +76,6 @@ class TaskItemWidget extends StatelessWidget {
       ),
     );
   }
+
+  void deleteTask() {}
 }
