@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_list/config/theme/app_theme.dart';
 import 'package:todo_list/core/utils/routes_manager.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,10 +8,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: RoutesManager.signUp,
-      onGenerateRoute: RoutesManager.router,
+    return ScreenUtilInit(
+      designSize: Size(412, 870),
+      useInheritedMediaQuery: true,
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: RoutesManager.signUp,
+        theme: AppTheme.lightTheme,
+        onGenerateRoute: RoutesManager.router,
+      ),
     );
   }
 }

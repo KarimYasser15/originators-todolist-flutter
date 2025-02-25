@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DefaultTextFormField extends StatelessWidget {
   String hintText;
@@ -17,9 +18,15 @@ class DefaultTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: Colors.blue,
       decoration: InputDecoration(
-        hintText: hintText,
-      ),
+          hintText: hintText,
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.r),
+              borderSide: BorderSide(color: Colors.blue)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(40.r),
+          )),
       obscureText: isPassword,
       controller: controller,
       validator: validator,
