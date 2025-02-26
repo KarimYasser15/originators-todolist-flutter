@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/models/task_model.dart';
 import 'package:todo_list/presentation/tabs/tasks/widget/add_task_bottom_sheet_widget.dart';
 import 'package:todo_list/presentation/tabs/tasks/widget/task_item_widget.dart';
 
 class TasksTab extends StatelessWidget {
   TasksTab({super.key});
   bool firstTimeToGetTasks = true;
+  List<TaskModel> tasks = [
+    TaskModel(
+        name: "Finish UI", description: "Finish todo app UI", status: true),
+    TaskModel(
+        name: "Finish Models",
+        description: "Finish todo app models",
+        status: true),
+    TaskModel(
+        name: "Finish integrating",
+        description: "Finish todo app integrating",
+        status: false),
+    TaskModel(
+        name: "Go Home",
+        description: "Finish all above tasks and go home",
+        status: false)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +34,11 @@ class TasksTab extends StatelessWidget {
       body: Expanded(
         child: ListView.builder(
           itemBuilder: (context, index) {
-            return TaskItemWidget();
+            return TaskItemWidget(
+              task: tasks[index],
+            );
           },
-          itemCount: 3,
+          itemCount: tasks.length,
           padding: EdgeInsets.only(top: 20),
         ),
       ),
@@ -31,7 +50,6 @@ class TasksTab extends StatelessWidget {
         ),
         onPressed: () => showModalBottomSheet(
           isScrollControlled: true,
-          isDismissible: true,
           context: context,
           builder: (context) => AddTaskBottomSheetWidget(),
         ),

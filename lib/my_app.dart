@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RoutesManager.home,
+        initialRoute: RoutesManager.login,
         theme: AppTheme.lightTheme,
         onGenerateRoute: RoutesManager.router,
       ),

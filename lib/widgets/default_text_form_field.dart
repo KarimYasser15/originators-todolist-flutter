@@ -19,15 +19,15 @@ class DefaultTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: Colors.blue,
-      decoration: InputDecoration(
-          constraints: BoxConstraints(maxHeight: 60.h),
-          hintText: hintText,
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40.r),
-              borderSide: BorderSide(color: Colors.blue)),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(40.r),
-          )),
+      // decoration: InputDecoration(
+      //     constraints: BoxConstraints(maxHeight: 60.h),
+      //     hintText: hintText,
+      //     focusedBorder: OutlineInputBorder(
+      //         borderRadius: BorderRadius.circular(40.r),
+      //         borderSide: BorderSide(color: Colors.blue)),
+      //     border: OutlineInputBorder(
+      //       borderRadius: BorderRadius.circular(40.r),
+      //     )),
       obscureText: isPassword,
       controller: controller,
       validator: validator,
