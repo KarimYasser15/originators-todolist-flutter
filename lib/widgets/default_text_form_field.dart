@@ -20,6 +20,7 @@ class DefaultTextFormField extends StatelessWidget {
     return TextFormField(
       cursorColor: Colors.blue,
       decoration: InputDecoration(
+          constraints: BoxConstraints(maxHeight: 60.h),
           hintText: hintText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(40.r),

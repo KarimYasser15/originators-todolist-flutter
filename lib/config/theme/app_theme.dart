@@ -13,7 +13,8 @@ class AppTheme {
                   bottomRight: Radius.circular(20.r)))),
       scaffoldBackgroundColor: Colors.white,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.blue,
           selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.blue));
+          unselectedItemColor: Colors.grey));
 }

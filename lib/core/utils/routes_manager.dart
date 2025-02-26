@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/screens/auth/login/login.dart';
-import 'package:todo_list/screens/auth/signup/signup.dart';
-import 'package:todo_list/screens/home/home.dart';
-import 'package:todo_list/screens/update_task/update_task.dart';
+import 'package:todo_list/presentation/screens/auth/login/login.dart';
+import 'package:todo_list/presentation/screens/auth/signup/signup.dart';
+import 'package:todo_list/presentation/screens/home/home.dart';
+import 'package:todo_list/presentation/screens/update_task/update_task.dart';
 
 class RoutesManager {
   static const String login = "/login";
