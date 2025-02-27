@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:todo_list/core/api/api_manager.dart';
+import 'package:todo_list/core/utils/local_storage.dart';
 import 'package:todo_list/features/auth/models/login_response/LoginResponse.dart';
 import 'package:todo_list/features/auth/models/signup_response/SignUpResponse.dart';
 
@@ -22,13 +23,10 @@ class AuthApiManager {
     if (response.statusCode == 201) {
       SignUpResponse signUpResponse =
           SignUpResponse.fromJson(jsonDecode(response.body));
-      print("Sucess");
       return signUpResponse;
     } else {
       try {
         var jsonRespoonse = jsonDecode((response.body));
-        print("ERROR");
-        print(jsonRespoonse.toString());
         SignUpResponse signUpResponse = SignUpResponse.fromJson(jsonRespoonse);
         throw Exception(signUpResponse.message);
       } catch (e) {
@@ -47,19 +45,14 @@ class AuthApiManager {
       body:
           jsonEncode(<String, String>{'name': userName, 'password': password}),
     );
-    print("TESTTTT");
-
-    print("TEST!@#");
     if (response.statusCode == 200) {
       LoginResponse loginResponse =
           LoginResponse.fromJson(jsonDecode(response.body));
-      print("Sucess");
+      LocalStorage.saveUserData(response);
       return loginResponse;
     } else {
       try {
         var jsonRespoonse = jsonDecode((response.body));
-        print("ERROR");
-        print(jsonRespoonse.toString());
         LoginResponse loginResponse = LoginResponse.fromJson(jsonRespoonse);
         throw Exception(loginResponse.message);
       } catch (e) {
