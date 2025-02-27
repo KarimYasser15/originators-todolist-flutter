@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_list/config/theme/app_styles.dart';
+import 'package:todo_list/config/app_styles.dart';
 
 class DefaultSubmitButton extends StatelessWidget {
   DefaultSubmitButton({required this.onPressed, required this.label});

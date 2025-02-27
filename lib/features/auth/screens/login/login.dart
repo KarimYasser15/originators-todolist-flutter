@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_list/config/theme/app_styles.dart';
-import 'package:todo_list/core/utils/routes_manager.dart';
-import 'package:todo_list/widgets/default_submit_button.dart';
-import 'package:todo_list/widgets/default_text_form_field.dart';
+import 'package:todo_list/config/app_styles.dart';
+import 'package:todo_list/config/routes_manager.dart';
+import 'package:todo_list/core/utils/validators.dart';
+import 'package:todo_list/features/auth/services/auth_api_manager.dart';
+import 'package:todo_list/features/auth/models/login_response/LoginResponse.dart';
+import 'package:todo_list/core/widgets/default_submit_button.dart';
+import 'package:todo_list/core/widgets/default_text_form_field.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  bool isRightCredentials = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Sign Up",
+          "Log In",
           style: AppStyles.appBarStyle,
         ),
       ),
@@ -34,18 +43,15 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 150.h, bottom: 70.h),
                   child: Text(
-                    "Welcome To Todo App\nPlease Sign Up",
+                    "Welcome To Todo App\nPlease Log In",
                     style: AppStyles.welcomeStyle,
                   ),
                 ),
                 DefaultTextFormField(
                   hintText: "User Name",
                   controller: userNameController,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "Please enter a user name";
-                    }
-                    return null;
+                  validator: (username) {
+                    return Validators.validateUsername(username);
                   },
                 ),
                 SizedBox(
@@ -55,11 +61,8 @@ class SignUpScreen extends StatelessWidget {
                   hintText: "Password",
                   controller: passwordController,
                   isPassword: true,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "Please enter a password";
-                    }
-                    return null;
+                  validator: (password) {
+                    return Validators.validatePassword(password);
                   },
                 ),
                 SizedBox(
@@ -67,20 +70,26 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Center(
                   child: DefaultSubmitButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          Navigator.pushReplacementNamed(
-                              context, RoutesManager.login);
-                        }
+                      onPressed: () async {
+                        isRightCredentials = await login();
+                        setState(() {});
                       },
-                      label: "Sign Up"),
+                      label: "Log In"),
                 ),
+                isRightCredentials
+                    ? Container()
+                    : Center(
+                        child: Text(
+                          "Incorrect Username or Password!",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
                 Center(
                   child: TextButton(
                       onPressed: () => Navigator.pushReplacementNamed(
-                          context, RoutesManager.login),
+                          context, RoutesManager.signUp),
                       child: Text(
-                        "Already have an account?",
+                        "Don't have an account?",
                         style: TextStyle(
                             color: Colors.grey,
                             decoration: TextDecoration.underline),
@@ -92,5 +101,22 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> login() async {
+    if (formKey.currentState!.validate()) {
+      try {
+        LoginResponse loginResponse = await AuthApiManager.userLogin(
+          userNameController.text,
+          passwordController.text,
+        );
+        Navigator.pushNamed(context, RoutesManager.home);
+        return true;
+      } catch (e) {
+        print("Login failed: $e");
+        return false;
+      }
+    }
+    return true;
   }
 }

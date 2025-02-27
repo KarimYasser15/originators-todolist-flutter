@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/my_app.dart';
-import 'package:todo_list/presentation/tabs/tasks/task_provider.dart';
+import 'package:todo_list/features/my_tasks/providers/task_provider.dart';
 
 void main() {
   runApp(Provider(create: (context) => TaskProvider(), child: MyApp()));

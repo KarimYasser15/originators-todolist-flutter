@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/utils/routes_manager.dart';
+import 'package:todo_list/config/routes_manager.dart';
 import 'package:todo_list/models/task_model.dart';
-import 'package:todo_list/widgets/default_submit_button.dart';
-import 'package:todo_list/widgets/default_text_form_field.dart';
+import 'package:todo_list/core/widgets/default_submit_button.dart';
+import 'package:todo_list/core/widgets/default_text_form_field.dart';
 
 class UpdateTaskScreen extends StatelessWidget {
   UpdateTaskScreen({super.key});

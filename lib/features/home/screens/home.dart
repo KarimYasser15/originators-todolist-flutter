@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/config/theme/app_styles.dart';
-import 'package:todo_list/presentation/tabs/tasks/task_provider.dart';
-import 'package:todo_list/presentation/tabs/tasks/widget/add_task_bottom_sheet_widget.dart';
-import 'package:todo_list/presentation/tabs/tasks/widget/task_item_widget.dart';
-import 'package:todo_list/presentation/tabs/tasks/tasks_tab.dart';
+import 'package:todo_list/config/app_styles.dart';
+import 'package:todo_list/features/my_tasks/providers/task_provider.dart';
+import 'package:todo_list/features/my_tasks/widget/add_task_bottom_sheet_widget.dart';
+import 'package:todo_list/features/my_tasks/widget/task_item_widget.dart';
+import 'package:todo_list/features/my_tasks/screens/tasks_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});

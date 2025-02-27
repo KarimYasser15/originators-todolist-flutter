@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/models/task_model.dart';
-import 'package:todo_list/presentation/tabs/tasks/widget/add_task_bottom_sheet_widget.dart';
-import 'package:todo_list/presentation/tabs/tasks/widget/task_item_widget.dart';
+import 'package:todo_list/features/my_tasks/widget/add_task_bottom_sheet_widget.dart';
+import 'package:todo_list/features/my_tasks/widget/task_item_widget.dart';
 
 class TasksTab extends StatelessWidget {
   TasksTab({super.key});

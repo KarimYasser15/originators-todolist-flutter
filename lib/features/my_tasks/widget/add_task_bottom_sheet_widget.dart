@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_list/widgets/default_submit_button.dart';
-import 'package:todo_list/widgets/default_text_form_field.dart';
+import 'package:todo_list/core/widgets/default_submit_button.dart';
+import 'package:todo_list/core/widgets/default_text_form_field.dart';
 
 class AddTaskBottomSheetWidget extends StatelessWidget {
   AddTaskBottomSheetWidget({super.key});
