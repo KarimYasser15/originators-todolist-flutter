@@ -10,10 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(412, 870),
-      useInheritedMediaQuery: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RoutesManager.login,
+        initialRoute: RoutesManager.home,
         theme: AppTheme.lightTheme,
         onGenerateRoute: RoutesManager.router,
       ),

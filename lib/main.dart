@@ -4,5 +4,6 @@ import 'package:todo_list/my_app.dart';
 import 'package:todo_list/features/my_tasks/providers/task_provider.dart';
 
 void main() {
-  runApp(Provider(create: (context) => TaskProvider(), child: MyApp()));
+  runApp(ChangeNotifierProvider(
+      create: (context) => TaskProvider(), child: MyApp()));
 }

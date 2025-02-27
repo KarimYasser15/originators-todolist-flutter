@@ -16,7 +16,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTab = 0;
-  List<Widget> tabs = [TasksTab(), TasksTab(), TasksTab(), TasksTab()];
+  List<Widget> tabs = [
+    TasksTab(),
+    Scaffold(
+      backgroundColor: Colors.red,
+    ),
+    TasksTab(),
+    TasksTab()
+  ];
   List<String> selectedTabAppbarTitle = [
     "My Tasks",
     "Social Media",
