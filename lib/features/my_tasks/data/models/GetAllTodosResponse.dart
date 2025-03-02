@@ -1,5 +1,3 @@
-import 'dart:convert'; // For JSON decoding
-
 class GetAllTodosResponse {
   GetAllTodosResponse({
     this.id,
@@ -11,8 +9,6 @@ class GetAllTodosResponse {
   });
 
   GetAllTodosResponse.fromJson(Map<String, dynamic> json) {
-    //Map<String, dynamic> jsonMap = jsonDecode(json);
-    //print(jsonMap);
     id = json['_id'];
     title = json['title'];
     completed = json['completed'];

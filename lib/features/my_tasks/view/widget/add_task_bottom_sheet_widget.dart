@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
-import 'package:todo_list/features/my_tasks/models/create_task_response/CreateTaskResponse.dart';
-import 'package:todo_list/features/my_tasks/providers/task_provider.dart';
-import 'package:todo_list/features/my_tasks/services/tasks_api_manager.dart';
+import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class AddTaskBottomSheetWidget extends StatefulWidget {
-  AddTaskBottomSheetWidget({super.key});
+  AddTaskBottomSheetWidget({super.key, required this.viewModel});
+  TasksViewModel viewModel;
 
   @override
   State<AddTaskBottomSheetWidget> createState() =>
@@ -66,9 +64,10 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
                   height: 30.h,
                 ),
                 DefaultSubmitButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        addTask();
+                        await widget.viewModel.addTask(taskName.text);
+                        Navigator.pop(context);
                       }
                     },
                     label: "Add Task")
@@ -77,15 +76,6 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
           ),
         ),
       ),
-    );
-  }
-
-  void addTask() async {
-    await TasksApiManager.createTask(taskName.text).then(
-      (value) {
-        Navigator.of(context).pop();
-        Provider.of<TaskProvider>(context, listen: false).getAllTasks();
-      },
     );
   }
 }

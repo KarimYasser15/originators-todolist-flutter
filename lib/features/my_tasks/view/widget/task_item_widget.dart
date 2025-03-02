@@ -1,13 +1,9 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/config/routes_manager.dart';
-import 'package:todo_list/features/my_tasks/models/get_all_todo_response/GetAllTodosResponse.dart';
-import 'package:todo_list/features/my_tasks/providers/task_provider.dart';
-import 'package:todo_list/features/my_tasks/services/tasks_api_manager.dart';
-import 'package:todo_list/models/task_model.dart';
+import 'package:todo_list/features/my_tasks/data/models/GetAllTodosResponse.dart';
+import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class TaskItemWidget extends StatefulWidget {
   TaskItemWidget({super.key, required this.task});
@@ -66,8 +62,8 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                     color: Colors.red,
                   ),
                   onTap: () {
-                    deleteTask();
-                    print("PRESSED");
+                    Provider.of<TasksViewModel>(context, listen: false)
+                        .deleteTask(widget.task.id!);
                   },
                 ),
               ],
@@ -75,14 +71,6 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
           ),
         ),
       ),
-    );
-  }
-
-  void deleteTask() async {
-    await TasksApiManager.deleteTodo(widget.task.id!).then(
-      (value) {
-        Provider.of<TaskProvider>(context, listen: false).getAllTasks();
-      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_list/config/app_styles.dart';
-import 'package:todo_list/features/my_tasks/screens/tasks_tab.dart';
+import 'package:todo_list/features/my_tasks/view/tasks_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
