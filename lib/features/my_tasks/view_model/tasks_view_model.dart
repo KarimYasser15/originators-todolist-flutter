@@ -20,9 +20,10 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addTask(String taskName) async {
+  Future<void> addTask(String taskName, String taskDescription) async {
     try {
-      var response = await TasksApiManager.createTask(taskName);
+      var response =
+          await TasksApiManager.createTask(taskName, taskDescription);
       await getAllTasks();
       if (response.statusCode == 201) {
       } else {

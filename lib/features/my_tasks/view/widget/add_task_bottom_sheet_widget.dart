@@ -66,7 +66,8 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
                 DefaultSubmitButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await widget.viewModel.addTask(taskName.text);
+                        await widget.viewModel
+                            .addTask(taskName.text, taskDescription.text);
                         Navigator.pop(context);
                       }
                     },
