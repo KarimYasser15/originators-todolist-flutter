@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(412, 870),
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RoutesManager.login,
+        initialRoute: RoutesManager.signUp,
         theme: AppTheme.lightTheme,
         onGenerateRoute: RoutesManager.router,
       ),

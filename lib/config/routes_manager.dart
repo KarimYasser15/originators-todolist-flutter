@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/features/auth/screens/login/login.dart';
-import 'package:todo_list/features/auth/screens/signup/signup.dart';
+import 'package:todo_list/features/auth/view/login/login.dart';
+import 'package:todo_list/features/auth/view/signup/signup.dart';
 import 'package:todo_list/features/home/screens/home.dart';
 import 'package:todo_list/presentation/screens/update_task/update_task.dart';
 
