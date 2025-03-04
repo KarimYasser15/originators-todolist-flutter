@@ -3,8 +3,9 @@
 
 class User {
   User({
-      this.id, 
-      this.name,});
+    this.id,
+    this.name,
+  });
 
   User.fromJson(dynamic json) {
     id = json['id'];
@@ -19,5 +20,4 @@ class User {
     map['name'] = name;
     return map;
   }
-
 }

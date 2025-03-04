@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/config/routes_manager.dart';
-import 'package:todo_list/models/task_model.dart';
+import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
+import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class UpdateTaskScreen extends StatelessWidget {
-  UpdateTaskScreen({super.key});
-  TaskModel? task;
-  TextEditingController taskNameController =
-      TextEditingController(text: "Get Task name from Model");
-  TextEditingController taskDescriptionController =
-      TextEditingController(text: "Get Task description from Model");
+  UpdateTaskScreen({super.key, required this.task});
+  GetAllTodosResponse task;
+  late TextEditingController taskNameController =
+      TextEditingController(text: task.title);
+  late TextEditingController taskDescriptionController =
+      TextEditingController(text: task.description);
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    TasksViewModel viewModel = TasksViewModel();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -34,23 +35,26 @@ class UpdateTaskScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               DefaultTextFormField(
-                hintText: "Task Name",
+                hintText: task.title!,
                 controller: taskNameController,
               ),
               SizedBox(
                 height: 10,
               ),
               DefaultTextFormField(
-                hintText: "Task Description",
+                hintText: task.description!,
                 controller: taskDescriptionController,
               ),
               SizedBox(
                 height: 20,
               ),
               DefaultSubmitButton(
-                  onPressed: () {
-                    updateTask();
-                    Navigator.pop(context, RoutesManager.home);
+                  onPressed: () async {
+                    await viewModel.updateTask(
+                        task.id!,
+                        taskNameController.text,
+                        taskDescriptionController.text);
+                    Navigator.pop(context);
                   },
                   label: "Update Task"),
             ],
@@ -59,6 +63,4 @@ class UpdateTaskScreen extends StatelessWidget {
       ),
     );
   }
-
-  void updateTask() {}
 }

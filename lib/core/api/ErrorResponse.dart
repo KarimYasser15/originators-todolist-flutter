@@ -4,9 +4,10 @@
 
 class ErrorResponse {
   ErrorResponse({
-      this.message, 
-      this.error, 
-      this.statusCode,});
+    this.message,
+    this.error,
+    this.statusCode,
+  });
 
   ErrorResponse.fromJson(dynamic json) {
     message = json['message'];
@@ -24,5 +25,4 @@ class ErrorResponse {
     map['statusCode'] = statusCode;
     return map;
   }
-
 }

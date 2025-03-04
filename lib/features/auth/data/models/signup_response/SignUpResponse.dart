@@ -6,11 +6,12 @@
 
 class SignUpResponse {
   SignUpResponse({
-      this.id, 
-      this.name, 
-      this.message, 
-      this.error, 
-      this.statusCode,});
+    this.id,
+    this.name,
+    this.message,
+    this.error,
+    this.statusCode,
+  });
 
   SignUpResponse.fromJson(dynamic json) {
     id = json['id'];
@@ -34,5 +35,4 @@ class SignUpResponse {
     map['statusCode'] = statusCode;
     return map;
   }
-
 }

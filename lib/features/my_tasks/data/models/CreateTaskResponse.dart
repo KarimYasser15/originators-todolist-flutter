@@ -10,15 +10,16 @@
 
 class CreateTaskResponse {
   CreateTaskResponse({
-      this.message, 
-      this.error, 
-      this.statusCode, 
-      this.title, 
-      this.completed, 
-      this.id, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.message,
+    this.error,
+    this.statusCode,
+    this.title,
+    this.completed,
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   CreateTaskResponse.fromJson(dynamic json) {
     message = json['message'];
@@ -54,5 +55,4 @@ class CreateTaskResponse {
     map['__v'] = v;
     return map;
   }
-
 }

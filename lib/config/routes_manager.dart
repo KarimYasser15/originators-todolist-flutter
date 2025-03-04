@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/features/auth/view/login/login.dart';
 import 'package:todo_list/features/auth/view/signup/signup.dart';
 import 'package:todo_list/features/home/screens/home.dart';
-import 'package:todo_list/presentation/screens/update_task/update_task.dart';
+import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/my_tasks/view/update_task_screen.dart';
 
 class RoutesManager {
   static const String login = "/login";
@@ -22,7 +23,11 @@ class RoutesManager {
       case home:
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case updateTask:
-        return MaterialPageRoute(builder: (context) => UpdateTaskScreen());
+        GetAllTodosResponse task = settings.arguments as GetAllTodosResponse;
+        return MaterialPageRoute(
+            builder: (context) => UpdateTaskScreen(
+                  task: task,
+                ));
     }
   }
 }

@@ -4,9 +4,10 @@
 
 class LoginFailResponse {
   LoginFailResponse({
-      this.message, 
-      this.error, 
-      this.statusCode,});
+    this.message,
+    this.error,
+    this.statusCode,
+  });
 
   LoginFailResponse.fromJson(dynamic json) {
     message = json['message'];
@@ -24,5 +25,4 @@ class LoginFailResponse {
     map['statusCode'] = statusCode;
     return map;
   }
-
 }

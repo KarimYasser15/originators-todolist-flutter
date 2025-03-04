@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/config/routes_manager.dart';
-import 'package:todo_list/features/my_tasks/data/models/GetAllTodosResponse.dart';
+import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
 import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class TaskItemWidget extends StatefulWidget {
@@ -19,11 +19,14 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, RoutesManager.updateTask),
+        onTap: () => Navigator.pushNamed(context, RoutesManager.updateTask,
+            arguments: widget.task),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              color: widget.task.completed! ? Colors.blue : Colors.grey),
+              borderRadius: BorderRadius.circular(20.r), color: Colors.grey),
+          // decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(20.r),
+          //     color: widget.task.completed ? Colors.blue : Colors.grey),
           width: double.infinity,
           height: 120.h,
           child: Padding(
@@ -46,7 +49,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                         height: 10.h,
                       ),
                       Text(
-                        "No Description Yet",
+                        widget.task.description!,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
