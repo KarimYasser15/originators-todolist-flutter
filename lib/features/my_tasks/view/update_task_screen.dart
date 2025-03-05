@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
 import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class UpdateTaskScreen extends StatelessWidget {
-  UpdateTaskScreen({super.key, required this.task});
+  UpdateTaskScreen({
+    super.key,
+    required this.task,
+  });
   GetAllTodosResponse task;
   late TextEditingController taskNameController =
       TextEditingController(text: task.title);
@@ -15,7 +19,7 @@ class UpdateTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TasksViewModel viewModel = TasksViewModel();
+    final viewModel = Provider.of<TasksViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -26,41 +30,48 @@ class UpdateTaskScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       backgroundColor: Colors.white,
-      body: Form(
-        key: formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              DefaultTextFormField(
-                hintText: task.title!,
-                controller: taskNameController,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              DefaultTextFormField(
-                hintText: task.description!,
-                controller: taskDescriptionController,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              DefaultSubmitButton(
-                  onPressed: () async {
-                    await viewModel.updateTask(
-                        task.id!,
-                        taskNameController.text,
-                        taskDescriptionController.text);
-                    Navigator.pop(context);
-                  },
-                  label: "Update Task"),
-            ],
+      body: Stack(children: [
+        Form(
+          key: formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DefaultTextFormField(
+                  hintText: task.title!,
+                  controller: taskNameController,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                DefaultTextFormField(
+                  hintText: task.description!,
+                  controller: taskDescriptionController,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                DefaultSubmitButton(
+                    onPressed: () async {
+                      await viewModel.updateTask(
+                          task.id!,
+                          taskNameController.text,
+                          taskDescriptionController.text);
+                      if (!viewModel.isLoading) {
+                        Navigator.pop(context);
+                      }
+                    },
+                    label: "Update Task"),
+              ],
+            ),
           ),
         ),
-      ),
+        viewModel.isLoading
+            ? Center(child: CircularProgressIndicator())
+            : Container(),
+      ]),
     );
   }
 }

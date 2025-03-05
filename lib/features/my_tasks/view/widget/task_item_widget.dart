@@ -6,7 +6,10 @@ import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/g
 import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
 
 class TaskItemWidget extends StatefulWidget {
-  TaskItemWidget({super.key, required this.task});
+  TaskItemWidget({
+    super.key,
+    required this.task,
+  });
   GetAllTodosResponse task;
 
   @override
@@ -16,11 +19,13 @@ class TaskItemWidget extends StatefulWidget {
 class _TaskItemWidgetState extends State<TaskItemWidget> {
   @override
   Widget build(BuildContext context) {
+    TasksViewModel viewModel =
+        Provider.of<TasksViewModel>(context, listen: false);
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () => Navigator.pushNamed(context, RoutesManager.updateTask,
-            arguments: widget.task),
+            arguments: {"task": widget.task, "viewModel": viewModel}),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r), color: Colors.grey),
@@ -65,8 +70,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                     color: Colors.red,
                   ),
                   onTap: () {
-                    Provider.of<TasksViewModel>(context, listen: false)
-                        .deleteTask(widget.task.id!);
+                    viewModel.deleteTask(widget.task.id!);
                   },
                 ),
               ],
