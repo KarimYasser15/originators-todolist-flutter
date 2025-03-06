@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/features/my_tasks/data/data_sources/tasks_api_manager.dart';
-
+// TODO: change parent folder name to be tasks/todos not my_tasks
 class TasksViewModel extends ChangeNotifier {
   //TODO: change data type of tasks to List<GetAllTodosResponse> or GetAllTodosResponse
   //TODO: Change tasks to be local instead of calling get all function every time
@@ -9,6 +9,7 @@ class TasksViewModel extends ChangeNotifier {
   bool isDeleted = false;
   String? errorMessage;
   bool isLoading = false;
+  
   Future<void> getAllTasks() async {
     isLoading = true;
     notifyListeners();
