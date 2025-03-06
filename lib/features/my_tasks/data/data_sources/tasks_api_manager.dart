@@ -6,11 +6,14 @@ import 'package:http/http.dart' as http;
 import 'package:todo_list/features/my_tasks/data/models/DeleteTaskResponse.dart';
 import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
 
+
 class TasksApiManager {
+  // TODO: Change token to be dynamic and not static
   static String token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzgzZmMwNTcyYzQ2ODZiMGIzYzUwNCIsInVzZXJuYW1lIjoia2FyaW0iLCJpYXQiOjE3NDExODA0MDAsImV4cCI6MTc0MTE4NDAwMH0.0X_snZ9sxkJsApTfpDobBR-BEFihen1zss2wzNIrFBs";
   static Future<CreateTaskResponse> createTask(String title, String description,
       {String status = "todo"}) async {
+    
     final response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint),
       headers: <String, String>{
@@ -35,6 +38,7 @@ class TasksApiManager {
       'Authorization': 'Bearer $token',
     });
     var data = json.decode(response.body);
+    // TODO: Change data type to be List<GetAllTodosResponse> and check the typo in eles to be elements/todos
     dynamic x = data.map((eles) {
       return GetAllTodosResponse.fromJson(eles);
     }).toList();

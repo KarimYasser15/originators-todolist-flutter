@@ -9,9 +9,11 @@ import 'package:todo_list/features/auth/data/models/signup_response/SignUpRespon
 class AuthApiManager {
   static Future<SignUpResponse> userSignUp(
       String userName, String password) async {
+        // TODO: remove all print statements
     print("User name: " + userName);
     print("Password: " + password);
     final response = await http.post(
+       // TODO: to use concatination with (+) too old code, I think there is a better way to do this
       Uri.parse(ApiManager.baseUrl + ApiManager.registerEndPoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
