@@ -2,18 +2,14 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:todo_list/core/api/api_manager.dart';
-import 'package:todo_list/core/utils/local_storage.dart';
-import 'package:todo_list/features/auth/data/models/login_response/LoginResponse.dart';
-import 'package:todo_list/features/auth/data/models/signup_response/SignUpResponse.dart';
+import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
+import 'package:todo_list/features/auth/data/models/signup_response/sign_up_response.dart';
 
 class AuthApiManager {
   static Future<SignUpResponse> userSignUp(
       String userName, String password) async {
-        // TODO: remove all print statements
-    print("User name: " + userName);
-    print("Password: " + password);
     final response = await http.post(
-       // TODO: to use concatination with (+) too old code, I think there is a better way to do this
+      // TODO: to use concatination with (+) too old code, I think there is a better way to do this
       Uri.parse(ApiManager.baseUrl + ApiManager.registerEndPoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -39,8 +35,6 @@ class AuthApiManager {
     );
     LoginResponse loginResponse =
         LoginResponse.fromJson(jsonDecode(response.body));
-    //  LocalStorage.saveUserData(response);
-    // LocalStorage.saveUserData(loginResponse);
     return loginResponse;
   }
 }

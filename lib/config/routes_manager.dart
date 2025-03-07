@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:todo_list/features/auth/view/login/login.dart';
 import 'package:todo_list/features/auth/view/signup/signup.dart';
 import 'package:todo_list/features/home/screens/home.dart';
-import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
-import 'package:todo_list/features/my_tasks/view/update_task_screen.dart';
-import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
+import 'package:todo_list/features/tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/tasks/view/update_task_screen.dart';
+import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class RoutesManager {
   static const String login = "/login";
@@ -26,9 +26,8 @@ class RoutesManager {
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case updateTask:
         var arguments = settings.arguments as Map;
-        // TasksViewModel viewModel = settings.arguments as TasksViewModel;
-        TasksViewModel viewModel = arguments?["viewModel"];
-        GetAllTodosResponse task = arguments?["task"];
+        TasksViewModel viewModel = arguments["viewModel"];
+        GetAllTodosResponse task = arguments["task"];
         return MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider.value(
                   value: viewModel,

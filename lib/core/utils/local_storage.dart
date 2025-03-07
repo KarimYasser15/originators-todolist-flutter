@@ -1,9 +1,6 @@
 import 'dart:convert';
-
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_list/features/auth/data/models/login_response/LoginResponse.dart';
-import 'package:todo_list/features/auth/data/models/login_response/User.dart';
+import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
 
 class LocalStorage {
   late SharedPreferences preferences;

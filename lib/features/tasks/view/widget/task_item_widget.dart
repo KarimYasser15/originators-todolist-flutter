@@ -2,33 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/config/routes_manager.dart';
-import 'package:todo_list/features/my_tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
-import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
+import 'package:todo_list/features/tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class TaskItemWidget extends StatefulWidget {
-  TaskItemWidget({
-    super.key,
-    required this.task,
-  });
+  TaskItemWidget({super.key, required this.task, required this.tasksSelected});
   GetAllTodosResponse task;
+  Function(String taskId, bool isTaskSelected) tasksSelected;
 
   @override
   State<TaskItemWidget> createState() => _TaskItemWidgetState();
 }
 
+late TasksViewModel viewModel;
+
 class _TaskItemWidgetState extends State<TaskItemWidget> {
+  Color selectedColor = Colors.grey;
+  bool deleteTask = false;
   @override
   Widget build(BuildContext context) {
-    TasksViewModel viewModel =
-        Provider.of<TasksViewModel>(context, listen: false);
+    viewModel = Provider.of<TasksViewModel>(context, listen: false);
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: InkWell(
+        onLongPress: () => selectTasks(),
         onTap: () => Navigator.pushNamed(context, RoutesManager.updateTask,
             arguments: {"task": widget.task, "viewModel": viewModel}),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r), color: Colors.grey),
+              borderRadius: BorderRadius.circular(20.r),
+              color: deleteTask ? Colors.red : Colors.grey),
           // decoration: BoxDecoration(
           //     borderRadius: BorderRadius.circular(20.r),
           //     color: widget.task.completed ? Colors.blue : Colors.grey),
@@ -79,5 +82,17 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
         ),
       ),
     );
+  }
+
+  void selectTasks() {
+    setState(() {
+      if (!deleteTask) {
+        deleteTask = true;
+        widget.tasksSelected(widget.task.id!, deleteTask);
+      } else {
+        deleteTask = false;
+        widget.tasksSelected(widget.task.id!, deleteTask);
+      }
+    });
   }
 }

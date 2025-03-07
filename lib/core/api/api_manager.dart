@@ -4,4 +4,6 @@ class ApiManager {
   static const registerEndPoint = "/auth/register";
   static const loginEndPoint = "/auth/login";
   static const todoEndPoint = "/todos/";
+  static const deleteManyTodosEndPoint = "/todos/delete-many";
+  static const deleteAllTodosEndPoint = "/todos/delete-all";
 }

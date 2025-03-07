@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_list/core/utils/messages.dart';
+import 'package:todo_list/core/utils/validators.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
-import 'package:todo_list/features/my_tasks/view_model/tasks_view_model.dart';
+import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class AddTaskBottomSheetWidget extends StatefulWidget {
   AddTaskBottomSheetWidget({super.key, required this.viewModel});
@@ -38,28 +40,18 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
             child: Column(
               children: [
                 DefaultTextFormField(
-                  hintText: "Task Name",
-                  controller: taskName,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "Please enter task name";
-                    }
-                    return null;
-                  },
-                ),
+                    hintText: "Task Name",
+                    controller: taskName,
+                    validator: (name) => Validators.validateTask(
+                        name, Messages.taskNameRequired)),
                 SizedBox(
                   height: 15.h,
                 ),
                 DefaultTextFormField(
-                  hintText: "Task Description",
-                  controller: taskDescription,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "Please enter task description";
-                    }
-                    return null;
-                  },
-                ),
+                    hintText: "Task Description",
+                    controller: taskDescription,
+                    validator: (description) => Validators.validateTask(
+                        description, Messages.taskDescriptionRequired)),
                 SizedBox(
                   height: 30.h,
                 ),

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:todo_list/core/utils/local_storage.dart';
+import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/features/auth/data/data_source/auth_api_manager.dart';
-import 'package:todo_list/features/auth/data/models/login_response/LoginResponse.dart';
-import 'package:todo_list/features/auth/data/models/signup_response/SignUpResponse.dart';
+import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
+import 'package:todo_list/features/auth/data/models/signup_response/sign_up_response.dart';
 
 class AuthViewModel extends ChangeNotifier {
   String error = "";
@@ -22,7 +23,6 @@ class AuthViewModel extends ChangeNotifier {
         error = response.message!;
       }
     } catch (e) {
-      print("Login Error: " + e.toString());
       error = e.toString();
     }
     isLoading = false;
@@ -38,15 +38,13 @@ class AuthViewModel extends ChangeNotifier {
       if (response.statusCode == null) {
         // LocalStorage.saveUserData(response);
         isRightCredintials = true;
-        print("Log in");
       } else {
         isRightCredintials = false;
         error = response.message!;
-        print("Log out");
       }
     } catch (e) {
-      print("Login Error: " + e.toString());
-      // error = e.toString();
+      error = Messages.somethingWrong;
+      error = e.toString();
     }
     isLoading = false;
     notifyListeners();

@@ -1,15 +1,15 @@
-/// message : "Invalid username or password"
-/// error : "Bad Request"
-/// statusCode : 400
+/// message : "Access denied, unauthorized"
+/// error : "Unauthorized"
+/// statusCode : 401
 
-class LoginFailResponse {
-  LoginFailResponse({
+class DeleteTaskResponse {
+  DeleteTaskResponse({
     this.message,
     this.error,
     this.statusCode,
   });
 
-  LoginFailResponse.fromJson(dynamic json) {
+  DeleteTaskResponse.fromJson(dynamic json) {
     message = json['message'];
     error = json['error'];
     statusCode = json['statusCode'];

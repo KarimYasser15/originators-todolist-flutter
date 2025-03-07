@@ -1,4 +1,4 @@
-import 'User.dart';
+import 'user.dart';
 
 /// message : "Invalid username or password"
 /// error : "Bad Request"
