@@ -8,4 +8,6 @@ class Messages {
   static const String taskNameRequired = "Please enter a task name";
   static const String taskDescriptionRequired =
       "Please enter a task description";
+  static const String taskAdded = "Task added successfully!";
+  static const String taskUpdated = "Task updated successfully!";
 }

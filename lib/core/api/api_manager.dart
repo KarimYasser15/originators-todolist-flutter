@@ -6,4 +6,6 @@ class ApiManager {
   static const todoEndPoint = "/todos/";
   static const deleteManyTodosEndPoint = "/todos/delete-many";
   static const deleteAllTodosEndPoint = "/todos/delete-all";
+  static const restoreManyTodosEndPoint = "/todos/restore-many";
+  static const restoreAllTodosEndPoint = "/todos/restore-all-todos";
 }

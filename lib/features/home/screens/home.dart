@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_list/config/app_styles.dart';
+import 'package:todo_list/features/settings/view/settings_tab.dart';
 import 'package:todo_list/features/tasks/view/tasks_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.red,
     ),
     TasksTab(),
-    TasksTab()
+    SettingsTab()
   ];
   List<String> selectedTabAppbarTitle = [
     "My Tasks",

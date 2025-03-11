@@ -8,7 +8,7 @@ import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 class TaskItemWidget extends StatefulWidget {
   TaskItemWidget({super.key, required this.task, required this.tasksSelected});
   GetAllTodosResponse task;
-  Function(String taskId, bool isTaskSelected) tasksSelected;
+  Function(int taskId, bool isTaskSelected) tasksSelected;
 
   @override
   State<TaskItemWidget> createState() => _TaskItemWidgetState();
@@ -73,7 +73,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                     color: Colors.red,
                   ),
                   onTap: () {
-                    viewModel.deleteTask(widget.task.id!);
+                    viewModel.deleteTask(widget.task.customId!);
                   },
                 ),
               ],
@@ -88,10 +88,10 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
     setState(() {
       if (!deleteTask) {
         deleteTask = true;
-        widget.tasksSelected(widget.task.id!, deleteTask);
+        widget.tasksSelected(widget.task.customId!, deleteTask);
       } else {
         deleteTask = false;
-        widget.tasksSelected(widget.task.id!, deleteTask);
+        widget.tasksSelected(widget.task.customId!, deleteTask);
       }
     });
   }

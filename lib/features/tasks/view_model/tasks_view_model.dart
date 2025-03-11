@@ -3,12 +3,15 @@ import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/features/tasks/data/data_sources/tasks_api_manager.dart';
 import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart';
 
 class TasksViewModel extends ChangeNotifier {
   //TODO: Change tasks to be local instead of calling get all function every time
+  //TODO: Display success message or error messages as Toast
   List<GetAllTodosResponse> tasks = [];
-  List<String> selectedTasksList = [];
+  List<int> selectedTasksList = [];
   String? errorMessage;
+  String? successMessage;
   bool isUpdated = false;
   bool isDeleted = false;
   bool isLoading = false;
@@ -22,6 +25,7 @@ class TasksViewModel extends ChangeNotifier {
       tasks = await TasksApiManager.getAllTodos();
     } catch (e) {
       errorMessage = Messages.somethingWrong;
+      print(e.toString());
     }
     isLoading = false;
     notifyListeners();
@@ -31,18 +35,20 @@ class TasksViewModel extends ChangeNotifier {
     try {
       var response =
           await TasksApiManager.createTodo(taskName, taskDescription);
-      await getAllTasks();
       if (response.statusCode == 201) {
+        await getAllTasks();
+        // successMessage = Messages.taskAdded;
       } else {
         errorMessage = response.message;
         notifyListeners();
       }
     } catch (e) {
       errorMessage = Messages.somethingWrong;
+      print(errorMessage);
     }
   }
 
-  Future<void> deleteTask(String todoId) async {
+  Future<void> deleteTask(int todoId) async {
     try {
       await TasksApiManager.deleteTodo(todoId);
       await getAllTasks();
@@ -51,13 +57,13 @@ class TasksViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> updateTask(
-      String taskId, String title, String description) async {
+  Future<void> updateTask(int taskId, String title, String description) async {
     isLoading = true;
     notifyListeners();
     try {
       await TasksApiManager.updateTodo(taskId, title, description);
       await getAllTasks();
+      successMessage = Messages.taskUpdated;
     } catch (e) {
       errorMessage = Messages.somethingWrong;
     }
@@ -74,11 +80,11 @@ class TasksViewModel extends ChangeNotifier {
         errorMessage = response.message;
       }
     } catch (e) {
-      errorMessage = e.toString();
+      errorMessage = Messages.somethingWrong;
     }
   }
 
-  Future<void> deleteManyTodos(List<String> todosIds) async {
+  Future<void> deleteManyTodos(List<int> todosIds) async {
     try {
       DeleteTaskResponse deleteManyTodosResponse =
           await TasksApiManager.deleteManyTodos(todosIds);
@@ -86,6 +92,34 @@ class TasksViewModel extends ChangeNotifier {
         getAllTasks();
       } else {
         errorMessage = deleteManyTodosResponse.message;
+      }
+    } catch (e) {
+      errorMessage = e.toString();
+    }
+  }
+
+  Future<void> restoreManyTodos(List<String> todosIds) async {
+    try {
+      RestoreTodosResponse restoreTodosResponse =
+          await TasksApiManager.restoreManyTodos(todosIds);
+      if (restoreTodosResponse.statusCode == null) {
+        await getAllTasks();
+      } else {
+        errorMessage = restoreTodosResponse.message;
+      }
+    } catch (e) {
+      errorMessage = e.toString();
+    }
+  }
+
+  Future<void> restoreAllTodos() async {
+    try {
+      RestoreTodosResponse restoreTodosResponse =
+          await TasksApiManager.restoreAllTodos();
+      if (restoreTodosResponse.statusCode == null) {
+        await getAllTasks();
+      } else {
+        errorMessage = restoreTodosResponse.message;
       }
     } catch (e) {
       errorMessage = e.toString();
@@ -102,7 +136,7 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectTask(String taskId, bool deleteTask) {
+  void selectTask(int taskId, bool deleteTask) {
     if (deleteTask) {
       noOfTasksSelected++;
       selectedTasksList.add(taskId);
