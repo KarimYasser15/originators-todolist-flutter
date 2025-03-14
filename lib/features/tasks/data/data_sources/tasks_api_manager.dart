@@ -5,14 +5,15 @@ import 'package:todo_list/core/api/api_manager.dart';
 import 'package:todo_list/features/tasks/data/models/create_task_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
-import 'package:todo_list/features/tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart';
 
 class TasksApiManager {
   // TODO: Change token to be dynamic and not static
   static String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Y2UxMzcyYjIyZTdjYzIzNWEyYzU2NSIsInVzZXJuYW1lIjoiYW53ciBlbCBzYWRhdCIsInZlcnNpb24iOjAsImlhdCI6MTc0MTcyOTc3MiwiZXhwIjoxNzQxNzMzMzcyfQ.DgeSvJiDX0TadC-DkYyraOcLNhwW5MpwfGWuKYlJUxk";
-  static Future<CreateTaskResponse> createTodo(String title, String description,
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Y2I5NWM3Mjk4MmZjMDkzZDRlODBlYiIsInVzZXJuYW1lIjoia2FyaW0iLCJ2ZXJzaW9uIjowLCJpYXQiOjE3NDE3ODU2NDQsImV4cCI6MTc0MTc4OTI0NH0.M-OJLaAdz6f1rrr4rBC461lgONaaYxRTeIqbzmYkyMM";
+  static Future<GetAllTodosResponse> createTodo(
+      String title, String description,
       {String status = "todo"}) async {
     final Response response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint),
@@ -26,8 +27,8 @@ class TasksApiManager {
         'status': status
       }),
     );
-    CreateTaskResponse createTaskResponse =
-        CreateTaskResponse.fromJson(jsonDecode(response.body));
+    dynamic data = jsonDecode(response.body);
+    GetAllTodosResponse createTaskResponse = GetAllTodosResponse.fromJson(data);
     return createTaskResponse;
   }
 

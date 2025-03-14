@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/features/tasks/data/data_sources/tasks_api_manager.dart';
 import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
-import 'package:todo_list/features/tasks/data/models/get_all_todos_response/get_all_todos_response.dart';
+import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart';
 
 class TasksViewModel extends ChangeNotifier {
@@ -33,28 +33,29 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> addTask(String taskName, String taskDescription) async {
     try {
-      var response =
+      GetAllTodosResponse response =
           await TasksApiManager.createTodo(taskName, taskDescription);
-      if (response.statusCode == 201) {
-        await getAllTasks();
-        // successMessage = Messages.taskAdded;
+      if (response.statusCode == null) {
+        tasks.add(response);
+        successMessage = Messages.taskAdded;
       } else {
         errorMessage = response.message;
-        notifyListeners();
       }
     } catch (e) {
       errorMessage = Messages.somethingWrong;
-      print(errorMessage);
+      print(e);
     }
+    notifyListeners();
   }
 
   Future<void> deleteTask(int todoId) async {
     try {
       await TasksApiManager.deleteTodo(todoId);
-      await getAllTasks();
+      tasks.removeWhere((task) => task.customId == todoId);
     } catch (e) {
       errorMessage = Messages.somethingWrong;
     }
+    notifyListeners();
   }
 
   Future<void> updateTask(int taskId, String title, String description) async {
@@ -62,8 +63,8 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
     try {
       await TasksApiManager.updateTodo(taskId, title, description);
-      await getAllTasks();
       successMessage = Messages.taskUpdated;
+      await getAllTasks();
     } catch (e) {
       errorMessage = Messages.somethingWrong;
     }
@@ -75,13 +76,15 @@ class TasksViewModel extends ChangeNotifier {
     try {
       DeleteTaskResponse response = await TasksApiManager.deleteAllTodos();
       if (response.statusCode == null) {
-        getAllTasks();
+        tasks = [];
       } else {
         errorMessage = response.message;
       }
     } catch (e) {
       errorMessage = Messages.somethingWrong;
     }
+    resetDeleteAttributes();
+    notifyListeners();
   }
 
   Future<void> deleteManyTodos(List<int> todosIds) async {
@@ -89,13 +92,18 @@ class TasksViewModel extends ChangeNotifier {
       DeleteTaskResponse deleteManyTodosResponse =
           await TasksApiManager.deleteManyTodos(todosIds);
       if (deleteManyTodosResponse.statusCode == null) {
-        getAllTasks();
+        // getAllTasks();
+        for (int i = 0; i < todosIds.length; i++) {
+          tasks.removeWhere((task) => task.customId == todosIds[i]);
+        }
       } else {
         errorMessage = deleteManyTodosResponse.message;
       }
     } catch (e) {
       errorMessage = e.toString();
     }
+    resetDeleteAttributes();
+    notifyListeners();
   }
 
   Future<void> restoreManyTodos(List<String> todosIds) async {
@@ -117,7 +125,6 @@ class TasksViewModel extends ChangeNotifier {
       RestoreTodosResponse restoreTodosResponse =
           await TasksApiManager.restoreAllTodos();
       if (restoreTodosResponse.statusCode == null) {
-        await getAllTasks();
       } else {
         errorMessage = restoreTodosResponse.message;
       }
