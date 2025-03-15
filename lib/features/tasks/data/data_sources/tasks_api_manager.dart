@@ -2,19 +2,22 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:todo_list/core/api/api_manager.dart';
-import 'package:todo_list/features/tasks/data/models/create_task_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:todo_list/core/utils/local_storage.dart';
+import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
 import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart';
 
 class TasksApiManager {
   // TODO: Change token to be dynamic and not static
-  static String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Y2I5NWM3Mjk4MmZjMDkzZDRlODBlYiIsInVzZXJuYW1lIjoia2FyaW0iLCJ2ZXJzaW9uIjowLCJpYXQiOjE3NDE3ODU2NDQsImV4cCI6MTc0MTc4OTI0NH0.M-OJLaAdz6f1rrr4rBC461lgONaaYxRTeIqbzmYkyMM";
+  // TODO: Find a way to avoid duplicating the token code
+  static String? token;
   static Future<GetAllTodosResponse> createTodo(
       String title, String description,
       {String status = "todo"}) async {
+    LoginResponse userData = await LocalStorage.getUserData();
+    token = userData.verificationToken.toString();
     final Response response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint),
       headers: <String, String>{
@@ -33,6 +36,8 @@ class TasksApiManager {
   }
 
   static Future<List<GetAllTodosResponse>> getAllTodos() async {
+    LoginResponse userData = await LocalStorage.getUserData();
+    token = userData.verificationToken.toString();
     final Response response = await http
         .get(Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint), headers: {
       'Content-Type': 'application/json',

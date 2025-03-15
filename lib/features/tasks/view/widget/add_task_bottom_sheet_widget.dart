@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_list/core/utils/assets_manager.dart';
 import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/core/utils/validators.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
@@ -42,6 +43,7 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
                 DefaultTextFormField(
                     hintText: "Task Name",
                     controller: taskName,
+                    iconPath: AssetsManager.userIcon,
                     validator: (name) => Validators.validateTask(
                         name, Messages.taskNameRequired)),
                 SizedBox(
@@ -49,6 +51,7 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
                 ),
                 DefaultTextFormField(
                     hintText: "Task Description",
+                    iconPath: AssetsManager.userIcon,
                     controller: taskDescription,
                     validator: (description) => Validators.validateTask(
                         description, Messages.taskDescriptionRequired)),

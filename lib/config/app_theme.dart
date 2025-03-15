@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_list/core/utils/colors_manager.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -16,5 +17,10 @@ class AppTheme {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.blue,
           selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey));
+          unselectedItemColor: Colors.grey),
+      // primaryColor: ColorsManager.choosenColor,
+      textSelectionTheme: TextSelectionThemeData(
+          cursorColor: ColorsManager.black,
+          selectionColor: ColorsManager.red,
+          selectionHandleColor: ColorsManager.red));
 }

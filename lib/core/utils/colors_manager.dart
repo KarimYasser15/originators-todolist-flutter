@@ -1,0 +1,13 @@
+import 'dart:ui';
+
+class ColorsManager {
+  static const Color red = Color(0xFFA8071A);
+  static const Color choosenColor = red;
+  static const Color neutralGrey1 = Color(0xFFFFFFFF);
+  static const Color neutralGrey6 = Color(0xFFBFBFBF);
+  static const Color neutralGrey7 = Color(0xFF8C8C8C);
+  static const Color neutralGrey9 = Color(0xFF434343);
+  static const Color black = Color(0xFF000000);
+  static const Color orange = Color.fromRGBO(234, 67, 53, 0.48);
+  static const Color blue = Color(0xFF1877F2);
+}

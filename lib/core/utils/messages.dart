@@ -1,6 +1,9 @@
 class Messages {
   static const String userNameRequired = "Please enter a user name";
+  static const String emailRequired = "Please enter an email";
   static const String passwordRequired = "Please enter a password";
+  static const String wrongEmail = "Please enter a valid email";
+  static const String passwordsDontMatch = "Passwords Don't Match";
   static const String passwordIsSmall =
       "Password must be at least 6 characters";
   static const String somethingWrong =

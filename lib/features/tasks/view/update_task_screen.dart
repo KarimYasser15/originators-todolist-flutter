@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/core/utils/assets_manager.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
@@ -42,6 +43,7 @@ class UpdateTaskScreen extends StatelessWidget {
                 DefaultTextFormField(
                   hintText: task.title!,
                   controller: taskNameController,
+                  iconPath: AssetsManager.userIcon,
                 ),
                 SizedBox(
                   height: 10,
@@ -49,6 +51,7 @@ class UpdateTaskScreen extends StatelessWidget {
                 DefaultTextFormField(
                   hintText: task.description!,
                   controller: taskDescriptionController,
+                  iconPath: AssetsManager.userIcon,
                 ),
                 SizedBox(
                   height: 20,

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:todo_list/core/utils/messages.dart';
 
 class Validators {
@@ -8,11 +9,30 @@ class Validators {
     return null;
   }
 
+  static String? validateEmail(String? email) {
+    if (email == null || email.trim().isEmpty) {
+      return Messages.emailRequired;
+    }
+    bool isValid = EmailValidator.validate(email);
+    if (!isValid) {
+      return Messages.wrongEmail;
+    }
+    return null;
+  }
+
   static String? validatePassword(String? password) {
     if (password == null || password.trim().isEmpty) {
       return Messages.passwordRequired;
     } else if (password.length < 6) {
       return Messages.passwordIsSmall;
+    }
+    return null;
+  }
+
+  static String? validateTwoPasswords(
+      String? password, String? confirmPassword) {
+    if (password != confirmPassword) {
+      return Messages.passwordsDontMatch;
     }
     return null;
   }

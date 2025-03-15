@@ -7,34 +7,42 @@ import 'package:todo_list/features/auth/data/models/signup_response/sign_up_resp
 
 class AuthApiManager {
   static Future<SignUpResponse> userSignUp(
-      String userName, String password) async {
+      String userName, String email, String password) async {
     final response = await http.post(
       // TODO: to use concatination with (+) too old code, I think there is a better way to do this
       Uri.parse(ApiManager.baseUrl + ApiManager.registerEndPoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body:
-          jsonEncode(<String, String>{'name': userName, 'password': password}),
+      body: jsonEncode(<String, String>{
+        'name': userName,
+        'password': password,
+        'email': email
+      }),
     );
-
     SignUpResponse signUpResponse =
         SignUpResponse.fromJson(jsonDecode(response.body));
-    return signUpResponse;
+    if (signUpResponse.message == null) {
+      return signUpResponse;
+    } else {
+      throw (signUpResponse.message.toString());
+    }
   }
 
-  static Future<LoginResponse> userLogin(
-      String userName, String password) async {
+  static Future<LoginResponse> userLogin(String email, String password) async {
     final response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.loginEndPoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body:
-          jsonEncode(<String, String>{'name': userName, 'password': password}),
+      body: jsonEncode(<String, String>{'email': email, 'password': password}),
     );
     LoginResponse loginResponse =
         LoginResponse.fromJson(jsonDecode(response.body));
-    return loginResponse;
+    if (loginResponse.message == null) {
+      return loginResponse;
+    } else {
+      throw (loginResponse.message.toString());
+    }
   }
 }

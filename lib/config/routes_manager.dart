@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/features/auth/view/login/login.dart';
-import 'package:todo_list/features/auth/view/signup/signup.dart';
+import 'package:todo_list/features/auth/view/screens/login.dart';
+import 'package:todo_list/features/auth/view/screens/signup.dart';
 import 'package:todo_list/features/home/screens/home.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/features/tasks/view/update_task_screen.dart';
