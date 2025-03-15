@@ -71,8 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: userNameController,
                             keyboardType: TextInputType.emailAddress,
                             iconPath: AssetsManager.emailIcon,
-                            validator: (username) {
-                              return Validators.validateUsername(username);
+                            validator: (email) {
+                              return Validators.validateEmail(email);
                             },
                           ),
                           SizedBox(
@@ -116,14 +116,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Text(
                               StringsManager.rememberMe,
-                              style: AppStyles.h5RegularDMSans(),
+                              style: AppStyles.h5RegularDMSans()
+                                  .copyWith(fontSize: 14.sp),
                             ),
                           ],
                         ),
                         Text(
                           StringsManager.forgotPassword,
                           style: AppStyles.h5RegularDMSans(
-                              color: ColorsManager.choosenColor),
+                                  color: ColorsManager.choosenColor)
+                              .copyWith(fontSize: 14.sp),
                         ),
                       ],
                     ),
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           label: StringsManager.login),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 30.h,
                     ),
                     Row(
                       children: [
@@ -177,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 30.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

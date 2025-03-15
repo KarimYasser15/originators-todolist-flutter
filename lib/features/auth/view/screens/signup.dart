@@ -139,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 20.h,
+                        height: 25.h,
                       ),
                       DefaultSubmitButton(
                           onPressed: () async {
@@ -164,6 +164,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 style: TextStyle(color: Colors.red),
                               ),
                             ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
                       Row(
                         children: [
                           Expanded(
@@ -185,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       SizedBox(
-                        height: 20.h,
+                        height: 30.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
