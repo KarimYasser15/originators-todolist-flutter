@@ -4,4 +4,11 @@ class AssetsManager {
   static const String googleIcon = "assets/icons/google.svg";
   static const String facebookIcon = "assets/icons/facebook.svg";
   static const String userIcon = "assets/icons/user.svg";
+  static const String drawerIcon = "assets/icons/drawer.svg";
+  static const String searchIcon = "assets/icons/search.svg";
+  static const String bellIcon = "assets/icons/bell.svg";
+  static const String avatarIcon = "assets/icons/avatar.svg";
+  static const String addIcon = "assets/icons/add.svg";
+  static const String calenderIcon = "assets/icons/calender.svg";
+  static const String homeIcon = "assets/icons/home.svg";
 }

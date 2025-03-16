@@ -26,60 +26,39 @@ class _TasksTabState extends State<TasksTab> {
   @override
   Widget build(BuildContext context) {
     viewModel.getAllTodos();
-    return ChangeNotifierProvider(
-      create: (_) => viewModel,
-      child: Consumer<TasksViewModel>(builder: (context, viewModel, child) {
-        if (viewModel.errorMessage != null) {
-          if (viewModel.errorMessage ==
-              Exception(Messages.unAuthorizedUser).toString()) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, RoutesManager.login);
-            });
-          }
-          return Center(
-            child: Text(viewModel.errorMessage.toString()),
-          );
-        } else if (viewModel.isLoading) {
-          return Center(
-            child: CircularLoading(),
-          );
-        } else {
-          return Scaffold(
-            body: Builder(builder: (context) {
-              return Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return TaskItemWidget(
-                      task: viewModel.tasks[index],
-                      tasksSelected: viewModel.selectTask,
-                    );
-                  },
-                  itemCount: viewModel.tasks.length,
-                  padding: EdgeInsets.only(top: 20),
-                ),
-              );
-            }),
-            floatingActionButton: FloatingActionButton(
-                backgroundColor:
-                    viewModel.isTasksSelected ? Colors.red : Colors.blue,
-                child: Icon(
-                  viewModel.isTasksSelected ? Icons.delete : Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  viewModel.isTasksSelected
-                      ? viewModel.deleteAllOrMany()
-                      : showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (_) => AddTaskBottomSheetWidget(
-                            viewModel: viewModel,
-                          ),
-                        );
-                }),
-          );
-        }
-      }),
-    );
+    return Consumer<TasksViewModel>(builder: (context, viewModel, child) {
+      if (viewModel.errorMessage != null) {
+        // if (viewModel.errorMessage ==
+        //     Exception(Messages.unAuthorizedUser).toString()) {
+        //   WidgetsBinding.instance.addPostFrameCallback((_) {
+        //     Navigator.pushReplacementNamed(context, RoutesManager.login);
+        //   });
+        // }
+        return Center(
+          child: Text(viewModel.errorMessage.toString()),
+        );
+      } else if (viewModel.isLoading) {
+        return Center(
+          child: CircularLoading(),
+        );
+      } else {
+        return Scaffold(
+          body: Builder(builder: (context) {
+            return Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return TaskItemWidget(
+                    task: viewModel.tasks[index],
+                    tasksSelected: viewModel.selectTask,
+                  );
+                },
+                itemCount: viewModel.tasks.length,
+                padding: EdgeInsets.only(top: 20),
+              ),
+            );
+          }),
+        );
+      }
+    });
   }
 }

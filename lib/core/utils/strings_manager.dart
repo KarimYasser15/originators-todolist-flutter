@@ -1,6 +1,10 @@
 class StringsManager {
   static const String login = "Log In";
   static const String welcomeBack = "Welcome Back";
+  static const String home = "Home";
+  static const String calender = "Calender";
+  static const String search = "Search";
+  static const String profile = "Profile";
   static const String email = "Email";
   static const String enterYourEmail = "Enter Your Email";
   static const String password = "Password";

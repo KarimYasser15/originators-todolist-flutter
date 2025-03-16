@@ -26,14 +26,10 @@ class RoutesManager {
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case updateTask:
         var arguments = settings.arguments as Map;
-        TasksViewModel viewModel = arguments["viewModel"];
         CreateGetTodosResponse task = arguments["task"];
         return MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider.value(
-                  value: viewModel,
-                  child: UpdateTaskScreen(
-                    task: task,
-                  ),
+            builder: (context) => UpdateTaskScreen(
+                  task: task,
                 ));
     }
     return null;
