@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/config/routes_manager.dart';
 import 'package:todo_list/core/utils/assets_manager.dart';
+import 'package:todo_list/core/utils/messages.dart';
+import 'package:todo_list/core/widgets/circular_loading.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
 import 'package:todo_list/core/widgets/default_submit_button.dart';
 import 'package:todo_list/core/widgets/default_text_form_field.dart';
@@ -11,7 +14,7 @@ class UpdateTaskScreen extends StatelessWidget {
     super.key,
     required this.task,
   });
-  GetAllTodosResponse task;
+  CreateGetTodosResponse task;
   late TextEditingController taskNameController =
       TextEditingController(text: task.title);
   late TextEditingController taskDescriptionController =
@@ -62,6 +65,13 @@ class UpdateTaskScreen extends StatelessWidget {
                           task.customId!,
                           taskNameController.text,
                           taskDescriptionController.text);
+                      if (viewModel.errorMessage ==
+                          Exception(Messages.unAuthorizedUser).toString()) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Navigator.pushReplacementNamed(
+                              context, RoutesManager.login);
+                        });
+                      }
                       if (!viewModel.isLoading) {
                         Navigator.pop(context);
                       }
@@ -71,9 +81,7 @@ class UpdateTaskScreen extends StatelessWidget {
             ),
           ),
         ),
-        viewModel.isLoading
-            ? Center(child: CircularProgressIndicator())
-            : Container(),
+        viewModel.isLoading ? Center(child: CircularLoading()) : Container(),
       ]),
     );
   }

@@ -27,7 +27,7 @@ class RoutesManager {
       case updateTask:
         var arguments = settings.arguments as Map;
         TasksViewModel viewModel = arguments["viewModel"];
-        GetAllTodosResponse task = arguments["task"];
+        CreateGetTodosResponse task = arguments["task"];
         return MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider.value(
                   value: viewModel,
@@ -36,5 +36,6 @@ class RoutesManager {
                   ),
                 ));
     }
+    return null;
   }
 }

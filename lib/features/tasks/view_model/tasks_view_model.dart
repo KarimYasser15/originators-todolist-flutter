@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/features/tasks/data/data_sources/tasks_api_manager.dart';
-import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
-import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart';
 
 class TasksViewModel extends ChangeNotifier {
   //TODO: Change tasks to be local instead of calling get all function every time
   //TODO: Display success message or error messages as Toast
-  List<GetAllTodosResponse> tasks = [];
+  List<CreateGetTodosResponse> tasks = [];
   List<int> selectedTasksList = [];
   String? errorMessage;
   String? successMessage;
@@ -18,14 +16,13 @@ class TasksViewModel extends ChangeNotifier {
   bool isTasksSelected = false;
   int noOfTasksSelected = 0;
 
-  Future<void> getAllTasks() async {
+  Future<void> getAllTodos() async {
     isLoading = true;
     notifyListeners();
     try {
       tasks = await TasksApiManager.getAllTodos();
     } catch (e) {
-      errorMessage = Messages.somethingWrong;
-      print(e.toString());
+      errorMessage = e.toString();
     }
     isLoading = false;
     notifyListeners();
@@ -33,17 +30,12 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> addTask(String taskName, String taskDescription) async {
     try {
-      GetAllTodosResponse response =
+      CreateGetTodosResponse response =
           await TasksApiManager.createTodo(taskName, taskDescription);
-      if (response.statusCode == null) {
-        tasks.add(response);
-        successMessage = Messages.taskAdded;
-      } else {
-        errorMessage = response.message;
-      }
+      tasks.add(response);
+      successMessage = Messages.taskAdded;
     } catch (e) {
-      errorMessage = Messages.somethingWrong;
-      print(e);
+      errorMessage = e.toString();
     }
     notifyListeners();
   }
@@ -53,7 +45,7 @@ class TasksViewModel extends ChangeNotifier {
       await TasksApiManager.deleteTodo(todoId);
       tasks.removeWhere((task) => task.customId == todoId);
     } catch (e) {
-      errorMessage = Messages.somethingWrong;
+      errorMessage = e.toString();
     }
     notifyListeners();
   }
@@ -64,9 +56,9 @@ class TasksViewModel extends ChangeNotifier {
     try {
       await TasksApiManager.updateTodo(taskId, title, description);
       successMessage = Messages.taskUpdated;
-      await getAllTasks();
+      await getAllTodos();
     } catch (e) {
-      errorMessage = Messages.somethingWrong;
+      errorMessage = e.toString();
     }
     isLoading = false;
     notifyListeners();
@@ -74,14 +66,10 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> deleteAllTasks() async {
     try {
-      DeleteTaskResponse response = await TasksApiManager.deleteAllTodos();
-      if (response.statusCode == null) {
-        tasks = [];
-      } else {
-        errorMessage = response.message;
-      }
+      await TasksApiManager.deleteAllTodos();
+      tasks = [];
     } catch (e) {
-      errorMessage = Messages.somethingWrong;
+      errorMessage = e.toString();
     }
     resetDeleteAttributes();
     notifyListeners();
@@ -89,15 +77,9 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> deleteManyTodos(List<int> todosIds) async {
     try {
-      DeleteTaskResponse deleteManyTodosResponse =
-          await TasksApiManager.deleteManyTodos(todosIds);
-      if (deleteManyTodosResponse.statusCode == null) {
-        // getAllTasks();
-        for (int i = 0; i < todosIds.length; i++) {
-          tasks.removeWhere((task) => task.customId == todosIds[i]);
-        }
-      } else {
-        errorMessage = deleteManyTodosResponse.message;
+      await TasksApiManager.deleteManyTodos(todosIds);
+      for (int i = 0; i < todosIds.length; i++) {
+        tasks.removeWhere((task) => task.customId == todosIds[i]);
       }
     } catch (e) {
       errorMessage = e.toString();
@@ -108,13 +90,8 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> restoreManyTodos(List<String> todosIds) async {
     try {
-      RestoreTodosResponse restoreTodosResponse =
-          await TasksApiManager.restoreManyTodos(todosIds);
-      if (restoreTodosResponse.statusCode == null) {
-        await getAllTasks();
-      } else {
-        errorMessage = restoreTodosResponse.message;
-      }
+      await TasksApiManager.restoreManyTodos(todosIds);
+      await getAllTodos();
     } catch (e) {
       errorMessage = e.toString();
     }
@@ -122,12 +99,7 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> restoreAllTodos() async {
     try {
-      RestoreTodosResponse restoreTodosResponse =
-          await TasksApiManager.restoreAllTodos();
-      if (restoreTodosResponse.statusCode == null) {
-      } else {
-        errorMessage = restoreTodosResponse.message;
-      }
+      await TasksApiManager.restoreAllTodos();
     } catch (e) {
       errorMessage = e.toString();
     }

@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
 import 'package:todo_list/core/api/api_manager.dart';
 import 'package:http/http.dart' as http;
+import 'package:todo_list/core/utils/handle_response.dart';
 import 'package:todo_list/core/utils/local_storage.dart';
 import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
 import 'package:todo_list/features/tasks/data/models/delete_task_response.dart';
@@ -12,12 +12,14 @@ import 'package:todo_list/features/tasks/data/models/restore_todos_response.dart
 class TasksApiManager {
   // TODO: Change token to be dynamic and not static
   // TODO: Find a way to avoid duplicating the token code
+  // TODO: Handle unauthorized response
   static String? token;
-  static Future<GetAllTodosResponse> createTodo(
+  static Future<CreateGetTodosResponse> createTodo(
       String title, String description,
       {String status = "todo"}) async {
     LoginResponse userData = await LocalStorage.getUserData();
     token = userData.verificationToken.toString();
+    HandleResponse().checkToken(token);
     final Response response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint),
       headers: <String, String>{
@@ -30,22 +32,31 @@ class TasksApiManager {
         'status': status
       }),
     );
+    HandleResponse().checkResponse(response);
     dynamic data = jsonDecode(response.body);
-    GetAllTodosResponse createTaskResponse = GetAllTodosResponse.fromJson(data);
-    return createTaskResponse;
+    CreateGetTodosResponse createTaskResponse =
+        CreateGetTodosResponse.fromJson(data);
+    if (createTaskResponse.statusCode == null) {
+      return createTaskResponse;
+    } else {
+      throw Exception(createTaskResponse.message);
+    }
   }
 
-  static Future<List<GetAllTodosResponse>> getAllTodos() async {
+  static Future<List<CreateGetTodosResponse>> getAllTodos() async {
+    print("TOKEN");
     LoginResponse userData = await LocalStorage.getUserData();
     token = userData.verificationToken.toString();
+    HandleResponse().checkToken(token);
     final Response response = await http
         .get(Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint), headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     });
+    HandleResponse().checkResponse(response);
     var data = json.decode(response.body);
-    List<GetAllTodosResponse> x = data.map<GetAllTodosResponse>((todos) {
-      return GetAllTodosResponse.fromJson(todos);
+    List<CreateGetTodosResponse> x = data.map<CreateGetTodosResponse>((todos) {
+      return CreateGetTodosResponse.fromJson(todos);
     }).toList();
     return x;
   }
@@ -58,12 +69,13 @@ class TasksApiManager {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         });
+    HandleResponse().checkResponse(response);
     var data = json.decode(response.body);
     DeleteTaskResponse y = DeleteTaskResponse.fromJson(data);
     return y;
   }
 
-  static Future<GetAllTodosResponse> updateTodo(
+  static Future<CreateGetTodosResponse> updateTodo(
       int taskId, String title, String description,
       {String status = "todo"}) async {
     final response = await http.put(
@@ -79,9 +91,14 @@ class TasksApiManager {
         'status': status
       }),
     );
-    GetAllTodosResponse updateTaskResponse =
-        GetAllTodosResponse.fromJson(jsonDecode(response.body));
-    return updateTaskResponse;
+    HandleResponse().checkResponse(response);
+    CreateGetTodosResponse updateTaskResponse =
+        CreateGetTodosResponse.fromJson(jsonDecode(response.body));
+    if (updateTaskResponse.statusCode == null) {
+      return updateTaskResponse;
+    } else {
+      throw Exception(updateTaskResponse.message);
+    }
   }
 
   static Future<DeleteTaskResponse> deleteAllTodos() async {
@@ -92,9 +109,14 @@ class TasksApiManager {
         'Authorization': 'Bearer $token',
       },
     );
+    HandleResponse().checkResponse(response);
     DeleteTaskResponse deleteAllTasksResponse =
         DeleteTaskResponse.fromJson(jsonDecode(response.body));
-    return deleteAllTasksResponse;
+    if (deleteAllTasksResponse.statusCode == null) {
+      return deleteAllTasksResponse;
+    } else {
+      throw Exception(deleteAllTasksResponse.message);
+    }
   }
 
   static Future<DeleteTaskResponse> deleteManyTodos(List<int> todosIds) async {
@@ -108,9 +130,14 @@ class TasksApiManager {
         'ids': todosIds,
       }),
     );
+    HandleResponse().checkResponse(response);
     DeleteTaskResponse deleteManyTodosResponse =
         DeleteTaskResponse.fromJson(jsonDecode(response.body));
-    return deleteManyTodosResponse;
+    if (deleteManyTodosResponse.statusCode == null) {
+      return deleteManyTodosResponse;
+    } else {
+      throw Exception(deleteManyTodosResponse.message);
+    }
   }
 
   static Future<RestoreTodosResponse> restoreManyTodos(
@@ -124,9 +151,14 @@ class TasksApiManager {
         body: jsonEncode(<String, List<String>>{
           'ids': todosIds,
         }));
+    HandleResponse().checkResponse(response);
     RestoreTodosResponse restoreTodosResponse =
         RestoreTodosResponse.fromJson(jsonDecode(response.body));
-    return restoreTodosResponse;
+    if (restoreTodosResponse.statusCode == null) {
+      return restoreTodosResponse;
+    } else {
+      throw Exception(restoreTodosResponse.message);
+    }
   }
 
   static Future<RestoreTodosResponse> restoreAllTodos() async {
@@ -137,8 +169,13 @@ class TasksApiManager {
         'Authorization': 'Bearer $token',
       },
     );
+    HandleResponse().checkResponse(response);
     RestoreTodosResponse restoreTodosResponse =
         RestoreTodosResponse.fromJson(jsonDecode(response.body));
-    return restoreTodosResponse;
+    if (restoreTodosResponse.statusCode == null) {
+      return restoreTodosResponse;
+    } else {
+      throw Exception(restoreTodosResponse.message);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class GetAllTodosResponse {
+class CreateGetTodosResponse {
   int? customId;
   String? title;
   String? status;
@@ -13,7 +13,7 @@ class GetAllTodosResponse {
   String? error;
   int? statusCode;
 
-  GetAllTodosResponse({
+  CreateGetTodosResponse({
     this.customId,
     this.title,
     this.status,
@@ -27,8 +27,8 @@ class GetAllTodosResponse {
     this.statusCode,
   });
 
-  factory GetAllTodosResponse.fromMap(Map<String, dynamic> data) {
-    return GetAllTodosResponse(
+  factory CreateGetTodosResponse.fromMap(Map<String, dynamic> data) {
+    return CreateGetTodosResponse(
       customId: data['customId'] as int?,
       title: data['title'] as String?,
       status: data['status'] as String?,
@@ -63,13 +63,13 @@ class GetAllTodosResponse {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [GetAllTodosResponse].
-  factory GetAllTodosResponse.fromJson(dynamic data) {
-    return GetAllTodosResponse.fromMap(data);
+  /// Parses the string and returns the resulting Json object as [CreateGetTodosResponse].
+  factory CreateGetTodosResponse.fromJson(dynamic data) {
+    return CreateGetTodosResponse.fromMap(data);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [GetAllTodosResponse] to a JSON string.
+  /// Converts [CreateGetTodosResponse] to a JSON string.
   String toJson() => json.encode(toMap());
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_list/core/utils/messages.dart';
 import 'package:todo_list/features/auth/data/models/login_response/login_response.dart';
 
 class LocalStorage {
@@ -16,9 +17,12 @@ class LocalStorage {
 
   static Future<LoginResponse> getUserData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String userData = preferences.getString("user")!;
-    LoginResponse userDataResponse =
-        LoginResponse.fromJson(jsonDecode(userData));
-    return userDataResponse;
+    String? userData = preferences.getString("user");
+    if (userData != null) {
+      LoginResponse userDataResponse =
+          LoginResponse.fromJson(jsonDecode(userData));
+      return userDataResponse;
+    }
+    throw Exception(Messages.unAuthorizedUser);
   }
 }

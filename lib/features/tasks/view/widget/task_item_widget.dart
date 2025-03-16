@@ -7,7 +7,7 @@ import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class TaskItemWidget extends StatefulWidget {
   TaskItemWidget({super.key, required this.task, required this.tasksSelected});
-  GetAllTodosResponse task;
+  CreateGetTodosResponse task;
   Function(int taskId, bool isTaskSelected) tasksSelected;
 
   @override

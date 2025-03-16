@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/core/widgets/circular_loading.dart';
 import 'package:todo_list/features/tasks/view/widget/task_item_widget.dart';
 import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
@@ -15,7 +16,7 @@ class _RestoreTasksScreenState extends State<RestoreTasksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getAllTasks();
+    viewModel.getAllTodos();
     return ChangeNotifierProvider(
       create: (context) => viewModel,
       child: Consumer<TasksViewModel>(
@@ -26,7 +27,7 @@ class _RestoreTasksScreenState extends State<RestoreTasksScreen> {
             );
           } else if (viewModel.isLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularLoading(),
             );
           }
           return Scaffold(

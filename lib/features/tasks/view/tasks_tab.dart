@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/config/routes_manager.dart';
+import 'package:todo_list/core/utils/messages.dart';
+import 'package:todo_list/core/widgets/circular_loading.dart';
 import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 import 'package:todo_list/features/tasks/view/widget/add_task_bottom_sheet_widget.dart';
 import 'package:todo_list/features/tasks/view/widget/task_item_widget.dart';
@@ -22,17 +25,23 @@ class _TasksTabState extends State<TasksTab> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getAllTasks();
+    viewModel.getAllTodos();
     return ChangeNotifierProvider(
       create: (_) => viewModel,
       child: Consumer<TasksViewModel>(builder: (context, viewModel, child) {
         if (viewModel.errorMessage != null) {
+          if (viewModel.errorMessage ==
+              Exception(Messages.unAuthorizedUser).toString()) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacementNamed(context, RoutesManager.login);
+            });
+          }
           return Center(
             child: Text(viewModel.errorMessage.toString()),
           );
         } else if (viewModel.isLoading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularLoading(),
           );
         } else {
           return Scaffold(

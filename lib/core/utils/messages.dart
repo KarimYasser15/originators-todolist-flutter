@@ -13,4 +13,6 @@ class Messages {
       "Please enter a task description";
   static const String taskAdded = "Task added successfully!";
   static const String taskUpdated = "Task updated successfully!";
+  static const String unAuthorizedUser = "Please Login First!";
+  static const String noInternet = "No Internet Connection!";
 }
