@@ -50,7 +50,7 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateTask(int taskId, String title, String description) async {
+  Future<void> updateTodo(int taskId, String title, String description) async {
     isLoading = true;
     notifyListeners();
     try {
@@ -61,6 +61,22 @@ class TasksViewModel extends ChangeNotifier {
       errorMessage = e.toString();
     }
     isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> updateTodoStatus(int taskId, String status) async {
+    try {
+      await TasksApiManager.updateTodoStatus(taskId, status);
+      successMessage = Messages.taskUpdated;
+      tasks
+          .firstWhere(
+            (task) => task.customId == taskId,
+          )
+          .status = status;
+      // await getAllTodos();
+    } catch (e) {
+      errorMessage = e.toString();
+    }
     notifyListeners();
   }
 

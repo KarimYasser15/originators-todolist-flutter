@@ -61,7 +61,7 @@ class UpdateTaskScreen extends StatelessWidget {
                 ),
                 DefaultSubmitButton(
                     onPressed: () async {
-                      await viewModel.updateTask(
+                      await viewModel.updateTodo(
                           task.customId!,
                           taskNameController.text,
                           taskDescriptionController.text);

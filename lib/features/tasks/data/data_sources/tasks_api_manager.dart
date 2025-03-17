@@ -103,6 +103,27 @@ class TasksApiManager {
     }
   }
 
+  static Future<CreateGetTodosResponse> updateTodoStatus(
+      int taskId, String status) async {
+    final response = await http.put(
+      Uri.parse(
+          ApiManager.baseUrl + ApiManager.todoEndPoint + taskId.toString()),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(<String, dynamic>{'status': status}),
+    );
+    HandleResponse().checkResponse(response);
+    CreateGetTodosResponse updateTaskResponse =
+        CreateGetTodosResponse.fromJson(jsonDecode(response.body));
+    if (updateTaskResponse.statusCode == null) {
+      return updateTaskResponse;
+    } else {
+      throw Exception(updateTaskResponse.message);
+    }
+  }
+
   static Future<DeleteTaskResponse> deleteAllTodos() async {
     final response = await http.delete(
       Uri.parse(ApiManager.baseUrl + ApiManager.deleteAllTodosEndPoint),

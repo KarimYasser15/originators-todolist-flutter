@@ -88,20 +88,24 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                       PopupMenuItem<String>(
                         value: 'in-progress',
                         child: Text(StringsManager.inProgress),
+                        onTap: () => viewModel.updateTodoStatus(
+                            widget.task.customId!, "in-progress"),
                       ),
                       PopupMenuItem<String>(
                         value: 'completed',
                         child: Text(StringsManager.complete),
+                        onTap: () => viewModel.updateTodoStatus(
+                            widget.task.customId!, "completed"),
                       ),
                       PopupMenuItem<String>(
                         value: 'todo',
                         child: Text(StringsManager.todo),
+                        onTap: () => viewModel.updateTodoStatus(
+                            widget.task.customId!, "todo"),
                       ),
                       PopupMenuItem<String>(
                         value: 'Delete',
                         child: Text(StringsManager.delete),
-                        // onTap: () =>
-                        // viewModel.updateTask(task, title, description),
                       ),
                     ],
                   ),
