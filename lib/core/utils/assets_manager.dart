@@ -11,4 +11,7 @@ class AssetsManager {
   static const String addIcon = "assets/icons/add.svg";
   static const String calenderIcon = "assets/icons/calender.svg";
   static const String homeIcon = "assets/icons/home.svg";
+  static const String shareIcon = "assets/icons/share.svg";
+  static const String moreIcon = "assets/icons/more.svg";
+  static const String plusCircleIcon = "assets/icons/plus_circle.svg";
 }

@@ -20,6 +20,11 @@ class StringsManager {
   static const String google = "Google";
   static const String userName = "User Name";
   static const String signUp = "Sign Up";
+  static const String invite = "Invite";
+  static const String complete = "Complete";
+  static const String inProgress = "In Progress";
+  static const String todo = "Todo";
+  static const String delete = "Delete";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }
