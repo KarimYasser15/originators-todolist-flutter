@@ -4,20 +4,16 @@ import 'package:todo_list/core/utils/messages.dart';
 class Validators {
   static String? validateUsername(String? username) {
     if (username == null || username.trim().isEmpty) {
-      return Messages.userNameRequired;
+      return Messages.enterEmailOrUsername;
     }
     return null;
   }
 
-  static String? validateEmail(String? email) {
-    if (email == null || email.trim().isEmpty) {
-      return Messages.emailRequired;
-    }
-    bool isValid = EmailValidator.validate(email);
-    if (!isValid) {
-      return Messages.wrongEmail;
-    }
-    return null;
+  static bool validateEmail(String? email) {
+    // if (email == null || email.trim().isEmpty) {
+    //   return Messages.emailRequired;
+    // }
+    return EmailValidator.validate(email!);
   }
 
   static String? validatePassword(String? password) {

@@ -31,13 +31,15 @@ class AuthApiManager {
     }
   }
 
-  static Future<LoginResponse> userLogin(String email, String password) async {
+  static Future<LoginResponse> userLogin(
+      String usernameOrEmail, String password, String type) async {
     final response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.loginEndPoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{'email': email, 'password': password}),
+      body: jsonEncode(
+          <String, String>{'$type': usernameOrEmail, 'password': password}),
     );
     LoginResponse loginResponse =
         LoginResponse.fromJson(jsonDecode(response.body));

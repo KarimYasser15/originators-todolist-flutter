@@ -71,8 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: userNameController,
                             keyboardType: TextInputType.emailAddress,
                             iconPath: AssetsManager.emailIcon,
-                            validator: (email) {
-                              return Validators.validateEmail(email);
+                            validator: (text) {
+                              return Validators.validateUsername(text);
                             },
                           ),
                           SizedBox(

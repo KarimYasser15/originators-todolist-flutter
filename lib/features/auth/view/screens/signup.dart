@@ -96,9 +96,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               iconPath: AssetsManager.emailIcon,
-                              validator: (email) {
-                                return Validators.validateEmail(email);
-                              },
+                              // validator: (email) {
+                              //   return Validators.validateEmail(email);
+                              // },
                             ),
                             SizedBox(
                               height: 8.h,
