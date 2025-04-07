@@ -9,6 +9,8 @@ class AuthApiManager {
   static Future<SignUpResponse> userSignUp(
       String userName, String email, String password) async {
     final response = await http.post(
+      //TODO: send fullname and change name to username in signup
+      //TODO: check all body in all apis
       // TODO: to use concatination with (+) too old code, I think there is a better way to do this
       Uri.parse(ApiManager.baseUrl + ApiManager.registerEndPoint),
       headers: <String, String>{
@@ -39,6 +41,7 @@ class AuthApiManager {
     );
     LoginResponse loginResponse =
         LoginResponse.fromJson(jsonDecode(response.body));
+    print(loginResponse.toString());
     if (loginResponse.message == null) {
       return loginResponse;
     } else {

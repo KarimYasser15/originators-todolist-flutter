@@ -4,7 +4,7 @@ import 'package:todo_list/features/auth/view/screens/login.dart';
 import 'package:todo_list/features/auth/view/screens/signup.dart';
 import 'package:todo_list/features/home/screens/home.dart';
 import 'package:todo_list/features/tasks/data/models/get_all_todos_response/create_get_todos_response.dart';
-import 'package:todo_list/features/tasks/view/update_task_screen.dart';
+import 'package:todo_list/features/update_task/view/update_task_screen.dart';
 import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class RoutesManager {

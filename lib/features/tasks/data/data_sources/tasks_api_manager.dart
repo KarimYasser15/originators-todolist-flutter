@@ -77,32 +77,6 @@ class TasksApiManager {
     return y;
   }
 
-  static Future<CreateGetTodosResponse> updateTodo(
-      int taskId, String title, String description,
-      {String status = "todo"}) async {
-    final response = await http.put(
-      Uri.parse(
-          ApiManager.baseUrl + ApiManager.todoEndPoint + taskId.toString()),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode(<String, dynamic>{
-        'title': title,
-        'description': description,
-        'status': status
-      }),
-    );
-    HandleResponse().checkResponse(response);
-    CreateGetTodosResponse updateTaskResponse =
-        CreateGetTodosResponse.fromJson(jsonDecode(response.body));
-    if (updateTaskResponse.statusCode == null) {
-      return updateTaskResponse;
-    } else {
-      throw Exception(updateTaskResponse.message);
-    }
-  }
-
   static Future<CreateGetTodosResponse> updateTodoStatus(
       int taskId, String status) async {
     final response = await http.put(

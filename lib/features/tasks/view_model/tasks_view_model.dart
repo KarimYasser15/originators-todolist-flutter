@@ -50,20 +50,6 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateTodo(int taskId, String title, String description) async {
-    isLoading = true;
-    notifyListeners();
-    try {
-      await TasksApiManager.updateTodo(taskId, title, description);
-      successMessage = Messages.taskUpdated;
-      await getAllTodos();
-    } catch (e) {
-      errorMessage = e.toString();
-    }
-    isLoading = false;
-    notifyListeners();
-  }
-
   Future<void> updateTodoStatus(int taskId, String status) async {
     try {
       await TasksApiManager.updateTodoStatus(taskId, status);

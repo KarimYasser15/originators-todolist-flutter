@@ -12,10 +12,11 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
     try {
       LoginResponse response = await AuthApiManager.userLogin(email, password);
-      LocalStorage.saveUserData(response);
+      // LocalStorage.saveUserData(response);
       isRightCredintials = true;
     } catch (e) {
       error = e.toString();
+      print(error);
     }
     isLoading = false;
     notifyListeners();

@@ -9,7 +9,7 @@ class User {
 
   User.fromJson(dynamic json) {
     id = json['id'];
-    name = json['name'];
+    name = json['username'];
   }
   String? id;
   String? name;
@@ -17,7 +17,7 @@ class User {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
-    map['name'] = name;
+    map['username'] = name;
     return map;
   }
 }

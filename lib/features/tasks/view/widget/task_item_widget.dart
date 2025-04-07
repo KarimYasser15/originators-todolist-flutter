@@ -46,7 +46,9 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
           elevation: 2),
       onLongPress: () => selectTasks(),
       onPressed: () => Navigator.pushNamed(context, RoutesManager.updateTask,
-          arguments: {"task": widget.task}),
+          arguments: {"task": widget.task}).then(
+        (value) => viewModel.getAllTodos(),
+      ),
       child: SizedBox(
         // width: double.infinity,
         child: Padding(
