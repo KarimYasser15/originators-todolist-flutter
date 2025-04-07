@@ -1,6 +1,7 @@
 class Messages {
   static const String userNameRequired = "Please enter a user name";
   static const String enterEmailOrUsername = "Please enter email or username";
+  static const String fullNameReequired = "Please enter your name";
   static const String emailRequired = "Please enter an email";
   static const String passwordRequired = "Please enter a password";
   static const String wrongEmail = "Please enter a valid email";

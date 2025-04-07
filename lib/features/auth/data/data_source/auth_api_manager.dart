@@ -7,7 +7,7 @@ import 'package:todo_list/features/auth/data/models/signup_response/sign_up_resp
 
 class AuthApiManager {
   static Future<SignUpResponse> userSignUp(
-      String userName, String email, String password) async {
+      String fullName, String userName, String email, String password) async {
     final response = await http.post(
       //TODO: send fullname and change name to username in signup
       //TODO: check all body in all apis
@@ -17,14 +17,15 @@ class AuthApiManager {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'name': userName,
+        'fullName': fullName,
+        'username': userName,
         'password': password,
         'email': email
       }),
     );
     SignUpResponse signUpResponse =
         SignUpResponse.fromJson(jsonDecode(response.body));
-    if (signUpResponse.message == null) {
+    if (signUpResponse.statusCode == null) {
       return signUpResponse;
     } else {
       throw (signUpResponse.message.toString());

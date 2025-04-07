@@ -22,17 +22,18 @@ class AuthViewModel extends ChangeNotifier {
       isRightCredintials = true;
     } catch (e) {
       error = e.toString();
-      print(error);
+      // print(error);
     }
     isLoading = false;
     notifyListeners();
   }
 
-  Future<void> signup(String userName, String email, String password) async {
+  Future<void> signup(
+      String fullName, String userName, String email, String password) async {
     isLoading = true;
     notifyListeners();
     try {
-      await AuthApiManager.userSignUp(userName, email, password);
+      await AuthApiManager.userSignUp(fullName, userName, email, password);
       // LocalStorage.saveUserData(response);
       isRightCredintials = true;
     } catch (e) {

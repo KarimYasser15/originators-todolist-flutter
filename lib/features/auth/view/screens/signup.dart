@@ -22,6 +22,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -66,6 +67,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              StringsManager.fullName,
+                              style: AppStyles.h5RegularDMSans(),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            DefaultTextFormField(
+                              hintText: StringsManager.fullName,
+                              controller: fullNameController,
+                              iconPath: AssetsManager.userIcon,
+                              validator: (fullName) {
+                                return Validators.validateFullName(fullName);
+                              },
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
                             Text(
                               StringsManager.userName,
                               style: AppStyles.h5RegularDMSans(),
@@ -146,6 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             FocusManager.instance.primaryFocus?.unfocus();
                             if (formKey.currentState!.validate()) {
                               await viewModel.signup(
+                                  fullNameController.text,
                                   userNameController.text,
                                   emailController.text,
                                   passwordController.text);

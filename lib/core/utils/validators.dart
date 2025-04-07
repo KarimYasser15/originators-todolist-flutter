@@ -4,6 +4,20 @@ import 'package:todo_list/core/utils/messages.dart';
 class Validators {
   static String? validateUsername(String? username) {
     if (username == null || username.trim().isEmpty) {
+      return Messages.userNameRequired;
+    }
+    return null;
+  }
+
+  static String? validateFullName(String? fullName) {
+    if (fullName == null || fullName.trim().isEmpty) {
+      return Messages.fullNameReequired;
+    }
+    return null;
+  }
+
+  static String? validateEmptyEmail(String? email) {
+    if (email == null || email.trim().isEmpty) {
       return Messages.enterEmailOrUsername;
     }
     return null;

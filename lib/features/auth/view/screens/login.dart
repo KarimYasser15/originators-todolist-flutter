@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                             iconPath: AssetsManager.emailIcon,
                             validator: (text) {
-                              return Validators.validateUsername(text);
+                              return Validators.validateEmptyEmail(text);
                             },
                           ),
                           SizedBox(
