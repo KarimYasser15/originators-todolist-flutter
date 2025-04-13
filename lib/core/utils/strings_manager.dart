@@ -8,6 +8,9 @@ class StringsManager {
   static const String settings = "Settings";
   static const String profile = "Profile";
   static const String email = "Email";
+  static const String emailAdress = "Email Adress";
+  static const String phoneNumber = "Phone Number";
+  static const String location = "Location";
   static const String enterYourEmail = "Enter Your Email";
   static const String password = "Password";
   static const String enterPassword = "Enter Password";
@@ -39,6 +42,12 @@ class StringsManager {
   static const String createNewTracker = "Create New Tracker";
   static const String taskName = "Task Name";
   static const String taskDescription = "Task Description";
+  static const String photo = "Photo";
+  static const String saveChanges = "Save Changes";
+  static const String deleteAccount = "Delete Account";
+  static const String profileInformation = "Profile Information";
+  static const String yourTheme = "Your Theme";
+  static const String lightMode = "Light Mode";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }

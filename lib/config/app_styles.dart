@@ -27,6 +27,13 @@ class AppStyles {
         fontSize: 12.sp,
         fontWeight: FontWeight.w400,
       );
+  static TextStyle b1RegularDMSans(
+          {Color color = ColorsManager.neutralGrey8}) =>
+      GoogleFonts.dmSans(
+        color: color,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+      );
   static TextStyle bodyRegular({Color color = Colors.white}) =>
       GoogleFonts.roboto(
         color: color,

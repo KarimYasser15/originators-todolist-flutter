@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_list/core/utils/assets_manager.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 
 class AppTheme {
@@ -10,6 +11,10 @@ class AppTheme {
         shadowColor: ColorsManager.neutralGrey1,
         surfaceTintColor: Colors.white,
         elevation: 2,
+      ),
+      actionIconTheme: ActionIconThemeData(
+        backButtonIconBuilder: (context) =>
+            SvgPicture.asset(AssetsManager.backButton),
       ),
       scaffoldBackgroundColor: Colors.white,
       floatingActionButtonTheme: FloatingActionButtonThemeData(

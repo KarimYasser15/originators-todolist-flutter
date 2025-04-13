@@ -23,4 +23,6 @@ class AssetsManager {
   static const String multiUsers = "assets/icons/multi_users.svg";
   static const String trash = "assets/icons/trash.svg";
   static const String settings = "assets/icons/settings.svg";
+  static const String backButton = "assets/icons/back_button.svg";
+  static const String editIcon = "assets/icons/edit.svg";
 }

@@ -85,10 +85,15 @@ class AppBarDrawer extends StatelessWidget {
                     height: 10.h,
                   ),
                   DrawerElevatedButton(
-                    label: StringsManager.settings,
-                    icon: SvgPicture.asset(AssetsManager.settings),
-                    onPressed: () => onDrawerItemClicked(DrawerItem.settings),
-                  ),
+                      label: StringsManager.settings,
+                      icon: SvgPicture.asset(AssetsManager.settings),
+                      onPressed: () {
+                        try {
+                          onDrawerItemClicked(DrawerItem.settings);
+                        } catch (e) {
+                          print("FAILEDDD ${e.toString()}");
+                        }
+                      }),
                 ],
               )
             ],
