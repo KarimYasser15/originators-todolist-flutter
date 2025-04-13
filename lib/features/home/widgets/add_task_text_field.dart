@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/config/app_styles.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 
-class DefaultTextFormField extends StatelessWidget {
+class AddTaskTextField extends StatefulWidget {
   String hintText;
+
   String? Function(String?)? validator;
   TextEditingController? controller;
-  TextInputType? keyboardType;
-  String? iconPath;
 
-  DefaultTextFormField(
-      {required this.hintText,
-      required this.controller,
-      this.validator,
-      required this.iconPath,
-      this.keyboardType});
+  AddTaskTextField({
+    required this.hintText,
+    required this.controller,
+    this.validator,
+  });
 
+  @override
+  State<AddTaskTextField> createState() => _AddTaskTextFieldState();
+}
+
+class _AddTaskTextFieldState extends State<AddTaskTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: AppStyles.h5RegularDMSans(),
-      keyboardType: keyboardType,
       decoration: InputDecoration(
-        hintText: hintText,
+        hintText: widget.hintText,
         hintStyle: AppStyles.h5RegularRoboto,
-        contentPadding: EdgeInsets.symmetric(vertical: 10),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6.r),
             borderSide: BorderSide(color: ColorsManager.neutralGrey6)),
@@ -40,15 +41,10 @@ class DefaultTextFormField extends StatelessWidget {
           borderSide: BorderSide(color: ColorsManager.neutralGrey6),
           borderRadius: BorderRadius.circular(6.r),
         ),
-        prefixIcon: iconPath != null
-            ? SvgPicture.asset(
-                iconPath!,
-                fit: BoxFit.scaleDown,
-              )
-            : null,
       ),
-      controller: controller,
-      validator: validator,
+      maxLines: null,
+      controller: widget.controller,
+      validator: widget.validator,
     );
   }
 }

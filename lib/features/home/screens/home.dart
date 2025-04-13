@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/core/utils/assets_manager.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 import 'package:todo_list/core/utils/strings_manager.dart';
 import 'package:todo_list/features/home/widgets/app_bar_drawer.dart';
 import 'package:todo_list/features/settings/view/settings_tab.dart';
 import 'package:todo_list/features/tasks/view/tasks_tab.dart';
+import 'package:todo_list/features/home/widgets/add_task_bottom_sheet_widget.dart';
+import 'package:todo_list/features/tasks/view_model/tasks_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -109,13 +112,15 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             // viewModel.isTasksSelected
             //     ? viewModel.deleteAllOrMany()
-            //     : showModalBottomSheet(
-            //         isScrollControlled: true,
-            //         context: context,
-            //         builder: (_) => AddTaskBottomSheetWidget(
-            //           viewModel: viewModel,
-            //         ),
-            //       );
+            showModalBottomSheet(
+              isDismissible: true,
+              isScrollControlled: true,
+              enableDrag: true,
+              context: context,
+              builder: (_) => AddTaskBottomSheetWidget(
+                viewModel: Provider.of<TasksViewModel>(context),
+              ),
+            );
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

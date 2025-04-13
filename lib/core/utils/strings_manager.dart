@@ -26,6 +26,11 @@ class StringsManager {
   static const String inProgress = "In Progress";
   static const String todo = "Todo";
   static const String delete = "Delete";
+  static const String trackerTitle = "Tracker Title :";
+  static const String description = "Description :";
+  static const String date = "Date :";
+  static const String mentioned = "@ Mentioned :";
+  static const String tags = "Tags :";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }
