@@ -30,7 +30,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
   bool deleteTask = false;
   @override
   Widget build(BuildContext context) {
-    viewModel = Provider.of<TasksViewModel>(context, listen: false);
+    viewModel = Provider.of<TasksViewModel>(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -88,10 +88,10 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuEntry<String>>[
                       PopupMenuItem<String>(
-                        value: 'in-progress',
+                        value: 'in_progress',
                         child: Text(StringsManager.inProgress),
                         onTap: () => viewModel.updateTodoStatus(
-                            widget.task.customId!, "in-progress"),
+                            widget.task.customId!, "in_progress"),
                       ),
                       PopupMenuItem<String>(
                         value: 'completed',
@@ -108,14 +108,11 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                       PopupMenuItem<String>(
                         value: 'Delete',
                         child: Text(StringsManager.delete),
+                        onTap: () =>
+                            viewModel.deleteTask(widget.task.customId!),
                       ),
                     ],
                   ),
-                  // IconButton(
-                  //     visualDensity: VisualDensity.compact,
-                  //     onPressed: () {},
-                  //     hoverColor: Colors.white,
-                  //     icon: SvgPicture.asset(AssetsManager.moreIcon)),
                 ],
               ),
               SizedBox(
@@ -134,15 +131,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                 height: 10.h,
               ),
               InviteButton(),
-              // InkWell(
-              //   child: Icon(
-              //     Icons.delete,
-              //     color: Colors.red,
-              //   ),
-              //   // onTap: () {
-              //   //   viewModel.deleteTask(widget.task.customId!);
-              //   // },
-              // ),
+
               SizedBox(
                 height: 10.h,
               ),
@@ -187,7 +176,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
   }
 
   double progressIndicator() {
-    if (widget.task.status == "in-progress") {
+    if (widget.task.status == "in_progress") {
       return 0.5;
     } else if (widget.task.status == "completed") {
       return 1;
