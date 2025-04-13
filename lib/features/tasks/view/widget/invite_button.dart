@@ -12,7 +12,7 @@ class InviteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 32.h,
+      height: 35.h,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.only(left: 12.w, right: 12.w),

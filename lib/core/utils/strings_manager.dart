@@ -35,6 +35,10 @@ class StringsManager {
   static const String mentioned = "@ Mentioned :";
   static const String tags = "Tags :";
   static const String myTrackers = "My Trackers";
+  static const String createTracker = "Create Tracker";
+  static const String createNewTracker = "Create New Tracker";
+  static const String taskName = "Task Name";
+  static const String taskDescription = "Task Description";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }
