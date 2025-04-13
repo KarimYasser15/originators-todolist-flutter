@@ -53,7 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
         ),
       ),
-      drawer: AppBarDrawer(),
+      drawer: AppBarDrawer(
+        onDrawerItemClicked: onDrawerItemClicked,
+      ),
       body: tabs[selectedTab],
       bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
@@ -124,5 +126,18 @@ class _HomeScreenState extends State<HomeScreen> {
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  void onDrawerItemClicked(DrawerItem item) {
+    setState(() {
+      switch (item) {
+        case DrawerItem.trash:
+          {}
+        case DrawerItem.profile:
+        case DrawerItem.settings:
+        case DrawerItem.friends:
+      }
+    });
+    Navigator.pop(context);
   }
 }

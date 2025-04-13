@@ -5,6 +5,7 @@ class StringsManager {
   static const String home = "Home";
   static const String calender = "Calender";
   static const String search = "Search";
+  static const String settings = "Settings";
   static const String profile = "Profile";
   static const String email = "Email";
   static const String enterYourEmail = "Enter Your Email";
@@ -19,6 +20,8 @@ class StringsManager {
   static const String facebook = "Facebook";
   static const String confirmPassword = "Confirm Password";
   static const String google = "Google";
+  static const String trash = "Trash";
+  static const String friends = "Friends";
   static const String userName = "User Name";
   static const String signUp = "Sign Up";
   static const String invite = "Invite";
@@ -31,6 +34,7 @@ class StringsManager {
   static const String date = "Date :";
   static const String mentioned = "@ Mentioned :";
   static const String tags = "Tags :";
+  static const String myTrackers = "My Trackers";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }

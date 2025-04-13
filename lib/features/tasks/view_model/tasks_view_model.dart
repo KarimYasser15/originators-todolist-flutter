@@ -18,7 +18,7 @@ class TasksViewModel extends ChangeNotifier {
 
   Future<void> getAllTodos() async {
     isLoading = true;
-    notifyListeners();
+    // notifyListeners();
     try {
       tasks = await TasksApiManager.getAllTodos();
     } catch (e) {

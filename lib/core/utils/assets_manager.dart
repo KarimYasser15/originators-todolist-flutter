@@ -19,4 +19,8 @@ class AssetsManager {
   static const String addTitleIcon = "assets/icons/add_title.svg";
   static const String descriptionIcon = "assets/icons/description.svg";
   static const String tagIcon = "assets/icons/tag.svg";
+  static const String myTrackers = "assets/icons/my_trackers.svg";
+  static const String multiUsers = "assets/icons/multi_users.svg";
+  static const String trash = "assets/icons/trash.svg";
+  static const String settings = "assets/icons/settings.svg";
 }
