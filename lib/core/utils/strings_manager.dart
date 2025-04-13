@@ -48,6 +48,8 @@ class StringsManager {
   static const String profileInformation = "Profile Information";
   static const String yourTheme = "Your Theme";
   static const String lightMode = "Light Mode";
+  static const String select = "Select";
+  static const String trashedTrackersSelected = "Trashed Trackers Selected";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }

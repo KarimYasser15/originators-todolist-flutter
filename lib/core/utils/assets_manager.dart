@@ -25,4 +25,5 @@ class AssetsManager {
   static const String settings = "assets/icons/settings.svg";
   static const String backButton = "assets/icons/back_button.svg";
   static const String editIcon = "assets/icons/edit.svg";
+  static const String restoreTasks = "assets/icons/restore_tasks.svg";
 }

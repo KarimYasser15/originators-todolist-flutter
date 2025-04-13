@@ -4,13 +4,13 @@ import 'package:todo_list/config/app_styles.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 
 class TagItem extends StatelessWidget {
-  const TagItem({super.key});
-
+  TagItem({super.key, required this.isTrash});
+  bool isTrash;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: ColorsManager.lightRed,
+          color: isTrash ? ColorsManager.neutralGrey6 : ColorsManager.lightRed,
           borderRadius: BorderRadius.circular(4.r)),
       child: Padding(
         padding: const EdgeInsets.all(5.0),

@@ -163,7 +163,10 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                       crossAxisCount: 1,
                       mainAxisSpacing: 8.w,
                       childAspectRatio: 1),
-                  itemBuilder: (context, index) => Center(child: TagItem()),
+                  itemBuilder: (context, index) => Center(
+                      child: TagItem(
+                    isTrash: false,
+                  )),
                   itemCount: 20,
                 ),
               ),
