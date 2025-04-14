@@ -8,6 +8,7 @@ class ApiManager {
   static const deleteAllTodosEndPoint = "/todos/delete-all";
   static const restoreManyTodosEndPoint = "/todos/restore-many";
   static const restoreAllTodosEndPoint = "/todos/restore-all-todos";
+  static String friendsEndPoint(String userName) => "/user/${userName}/friend";
 
   // //Abdelrahman
   // static const baseUrl = "todo-app-production-e92c.up.railway.app";

@@ -7,8 +7,8 @@ import 'package:todo_list/core/utils/colors_manager.dart';
 import 'package:todo_list/core/utils/strings_manager.dart';
 
 class FriendsItem extends StatelessWidget {
-  const FriendsItem({super.key});
-
+  FriendsItem({super.key, required this.userName});
+  String userName;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,7 +32,7 @@ class FriendsItem extends StatelessWidget {
                   height: 50.h,
                 ),
                 Text(
-                  "Wade Warren",
+                  userName,
                   style: AppStyles.b1MediumDMSans(),
                 ),
                 SizedBox(

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/config/app_styles.dart';
 import 'package:todo_list/core/utils/assets_manager.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 import 'package:todo_list/core/utils/strings_manager.dart';
 import 'package:todo_list/core/utils/validators.dart';
-import 'package:todo_list/features/home/widgets/add_task_text_field.dart';
+import 'package:todo_list/features/friends/view_model/friends_view_model.dart';
+import 'package:todo_list/features/tasks/view/widget/task_item_widget.dart';
 
 class AddFriendBottomSheet extends StatefulWidget {
-  const AddFriendBottomSheet({super.key});
+  AddFriendBottomSheet({super.key, required this.viewModel});
+  FriendsViewModel viewModel;
 
   @override
   State<AddFriendBottomSheet> createState() => _AddFriendBottomSheetState();
@@ -121,6 +124,12 @@ class _AddFriendBottomSheetState extends State<AddFriendBottomSheet> {
                           alignment: Alignment.center),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
+                          try {
+                            await widget.viewModel
+                                .addFriend(addFriendController.text);
+                          } catch (e) {
+                            print("HELLO ${e.toString()}");
+                          }
                           Navigator.pop(context);
                         }
                       },
