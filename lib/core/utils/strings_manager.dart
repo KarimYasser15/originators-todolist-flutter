@@ -50,6 +50,8 @@ class StringsManager {
   static const String lightMode = "Light Mode";
   static const String select = "Select";
   static const String trashedTrackersSelected = "Trashed Trackers Selected";
+  static const String contact = "Contact";
+  static const String addFriend = "Add Friend";
   static const String welcomeToOriginatorsTracker =
       "Welcome To Originators\nTracker";
 }

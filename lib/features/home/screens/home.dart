@@ -134,18 +134,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onDrawerItemClicked(DrawerItem item) {
     setState(() {
+      Navigator.pop(context);
       switch (item) {
         case DrawerItem.trash:
           {
-            Navigator.pop(context);
             Navigator.pushNamed(context, RoutesManager.trash);
           }
         case DrawerItem.profile:
           {}
         case DrawerItem.friends:
-          {}
+          {
+            Navigator.pushNamed(context, RoutesManager.friends);
+          }
         case DrawerItem.settings:
-          Navigator.pop(context);
           Navigator.pushNamed(context, RoutesManager.settingsScreen);
 
           break;
