@@ -39,7 +39,7 @@ class Validators {
     return null;
   }
 
-  static String? validateTwoPasswords(
+  static String? validateConfirmationPasswords(
       String? password, String? confirmPassword) {
     if (password != confirmPassword) {
       return Messages.passwordsDontMatch;

@@ -150,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               hintText: StringsManager.confirmPassword,
                               controller: confirmPasswordController,
                               validator: (password) {
-                                return Validators.validateTwoPasswords(
+                                return Validators.validateConfirmationPasswords(
                                     password, passwordController.text);
                               },
                             ),

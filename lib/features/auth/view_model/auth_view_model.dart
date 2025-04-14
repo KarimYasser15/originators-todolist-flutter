@@ -34,7 +34,6 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
     try {
       await AuthApiManager.userSignUp(fullName, userName, email, password);
-      // LocalStorage.saveUserData(response);
       isRightCredintials = true;
     } catch (e) {
       error = e.toString();
