@@ -21,7 +21,7 @@ class FriendsItem extends StatelessWidget {
           right: 0,
           child: Card(
             margin: EdgeInsets.only(top: 40),
-            color: ColorsManager.neutralGrey1,
+            color: ColorsManager.neutralGrey2,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
                 side: BorderSide(color: ColorsManager.neutralGrey4)),
