@@ -148,6 +148,7 @@ class _TrashItemWidgetState extends State<TrashItemWidget> {
                 itemBuilder: (context, index) => Center(
                     child: TagItem(
                   isTrash: true,
+                  tag: "HELLO",
                 )),
                 itemCount: 20,
               ),

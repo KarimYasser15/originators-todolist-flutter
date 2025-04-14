@@ -4,8 +4,9 @@ import 'package:todo_list/config/app_styles.dart';
 import 'package:todo_list/core/utils/colors_manager.dart';
 
 class TagItem extends StatelessWidget {
-  TagItem({super.key, required this.isTrash});
+  TagItem({super.key, required this.isTrash, required this.tag});
   bool isTrash;
+  String tag;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +16,7 @@ class TagItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Text(
-          "online".toUpperCase(),
+          tag.toUpperCase(),
           style: AppStyles.b2RegularDMSans(),
         ),
       ),

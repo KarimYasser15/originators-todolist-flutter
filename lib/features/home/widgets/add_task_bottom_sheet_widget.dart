@@ -186,8 +186,8 @@ class _AddTaskBottomSheetWidgetState extends State<AddTaskBottomSheetWidget> {
                           alignment: Alignment.center),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          await widget.viewModel
-                              .addTask(taskName.text, taskDescription.text);
+                          await widget.viewModel.addTask(
+                              taskName.text, taskDescription.text, tags.text);
                           Navigator.pop(context);
                         }
                       },

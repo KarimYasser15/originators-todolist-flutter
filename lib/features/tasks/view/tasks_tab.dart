@@ -29,12 +29,12 @@ class _TasksTabState extends State<TasksTab> {
     // viewModel.getAllTodos();
     return Consumer<TasksViewModel>(builder: (context, viewModel, child) {
       // if (viewModel.errorMessage != null) {
-      //   // if (viewModel.errorMessage ==
-      //   //     Exception(Messages.unAuthorizedUser).toString()) {
-      //   //   WidgetsBinding.instance.addPostFrameCallback((_) {
-      //   //     Navigator.pushReplacementNamed(context, RoutesManager.login);
-      //   //   });
-      //   // }
+      // if (viewModel.errorMessage ==
+      //     Exception(Messages.unAuthorizedUser).toString()) {
+      //   WidgetsBinding.instance.addPostFrameCallback((_) {
+      //     Navigator.pushReplacementNamed(context, RoutesManager.login);
+      //   });
+      // }
       //   return Scaffold(
       //       body: RawScrollbar(
       //     radius: Radius.circular(20.r),
@@ -138,7 +138,6 @@ class _TasksTabState extends State<TasksTab> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    // TaskItemWidget()
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

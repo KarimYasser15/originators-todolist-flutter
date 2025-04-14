@@ -15,12 +15,12 @@ class TasksApiManager {
   // TODO: Handle unauthorized response
   static String? token;
   static Future<CreateGetTodosResponse> createTodo(
-      String title, String description,
+      String title, String description, List<String>? tags,
       {String status = "todo"}) async {
-    token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjNiZDZiMWJhZTdiODlkZTA1YmI5ZiIsInVzZXJuYW1lIjoia2FyaW0iLCJ2ZXJzaW9uIjowLCJpYXQiOjE3NDQ1Mzk0NTYsImV4cCI6MTc0NDU0MzA1Nn0.h7IKEuDNBHYCfoCqoO_A1qvKQQeknATfPgtBL0RzB68";
-    // LoginResponse userData = await LocalStorage.getUserData();
-    // token = userData.verificationToken.toString();
+    // token =
+    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjNiZDZiMWJhZTdiODlkZTA1YmI5ZiIsInVzZXJuYW1lIjoia2FyaW0iLCJ2ZXJzaW9uIjowLCJpYXQiOjE3NDQ1Mzk0NTYsImV4cCI6MTc0NDU0MzA1Nn0.h7IKEuDNBHYCfoCqoO_A1qvKQQeknATfPgtBL0RzB68";
+    LoginResponse userData = await LocalStorage.getUserData();
+    token = userData.verificationToken.toString();
     HandleResponse().checkToken(token);
     final Response response = await http.post(
       Uri.parse(ApiManager.baseUrl + ApiManager.todoEndPoint),
@@ -31,7 +31,8 @@ class TasksApiManager {
       body: jsonEncode(<String, dynamic>{
         'title': title,
         'description': description,
-        'status': status
+        'status': status,
+        'tags': tags ?? []
       }),
     );
     HandleResponse().checkResponse(response);
@@ -46,7 +47,6 @@ class TasksApiManager {
   }
 
   static Future<List<CreateGetTodosResponse>> getAllTodos() async {
-    print("TOKEN");
     LoginResponse userData = await LocalStorage.getUserData();
     token = userData.verificationToken.toString();
     HandleResponse().checkToken(token);
@@ -60,13 +60,11 @@ class TasksApiManager {
     List<CreateGetTodosResponse> x = data.map<CreateGetTodosResponse>((todos) {
       return CreateGetTodosResponse.fromJson(todos);
     }).toList();
-    print("TOKEN21");
 
     return x;
   }
 
   static Future<DeleteTaskResponse> deleteTodo(int todoId) async {
-    print("HELLO, $todoId");
     final Response response = await http.delete(
         Uri.parse(
             ApiManager.baseUrl + ApiManager.todoEndPoint + todoId.toString()),

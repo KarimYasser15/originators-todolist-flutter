@@ -28,10 +28,18 @@ class TasksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addTask(String taskName, String taskDescription) async {
+  Future<void> addTask(
+      String taskName, String taskDescription, String tags) async {
     try {
+      tags = tags.trim();
+
+      List<String> allTags = tags
+          .split('@') // split by '@'
+          .map((tag) => tag.trim()) // trim each tag
+          .where((tag) => tag.isNotEmpty) // remove empty strings
+          .toList();
       CreateGetTodosResponse response =
-          await TasksApiManager.createTodo(taskName, taskDescription);
+          await TasksApiManager.createTodo(taskName, taskDescription, allTags);
       tasks.add(response);
       successMessage = Messages.taskAdded;
     } catch (e) {

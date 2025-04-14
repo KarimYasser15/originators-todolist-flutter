@@ -166,8 +166,9 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                   itemBuilder: (context, index) => Center(
                       child: TagItem(
                     isTrash: false,
+                    tag: widget.task.tags?[index],
                   )),
-                  itemCount: 20,
+                  itemCount: widget.task.tags?.length ?? 0,
                 ),
               ),
               // TagItem(),
