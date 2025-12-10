@@ -1,0 +1,30 @@
+class AssetsManager {
+  static const String appLogo = "assets/images/originators_tracker.png";
+  static const String emailIcon = "assets/icons/email.svg";
+  static const String googleIcon = "assets/icons/google.svg";
+  static const String facebookIcon = "assets/icons/facebook.svg";
+  static const String userIcon = "assets/icons/user.svg";
+  static const String drawerIcon = "assets/icons/drawer.svg";
+  static const String searchIcon = "assets/icons/search.svg";
+  static const String bellIcon = "assets/icons/bell.svg";
+  static const String avatarIcon = "assets/icons/avatar.svg";
+  static const String addIcon = "assets/icons/add.svg";
+  static const String calenderIcon = "assets/icons/calender.svg";
+  static const String homeIcon = "assets/icons/home.svg";
+  static const String shareIcon = "assets/icons/share.svg";
+  static const String moreIcon = "assets/icons/more.svg";
+  static const String plusCircleIcon = "assets/icons/plus_circle.svg";
+  static const String closeIcon = "assets/icons/close.svg";
+  static const String addTaskImage = "assets/images/add_task.png";
+  static const String addTitleIcon = "assets/icons/add_title.svg";
+  static const String descriptionIcon = "assets/icons/description.svg";
+  static const String tagIcon = "assets/icons/tag.svg";
+  static const String myTrackers = "assets/icons/my_trackers.svg";
+  static const String multiUsers = "assets/icons/multi_users.svg";
+  static const String trash = "assets/icons/trash.svg";
+  static const String settings = "assets/icons/settings.svg";
+  static const String backButton = "assets/icons/back_button.svg";
+  static const String editIcon = "assets/icons/edit.svg";
+  static const String restoreTasks = "assets/icons/restore_tasks.svg";
+  static const String contact = "assets/icons/contact.svg";
+}

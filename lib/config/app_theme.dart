@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_list/core/utils/assets_manager.dart';
+import 'package:todo_list/core/utils/colors_manager.dart';
+
+class AppTheme {
+  static ThemeData lightTheme = ThemeData(
+      primaryColor: ColorsManager.choosenColor,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        shadowColor: ColorsManager.neutralGrey1,
+        surfaceTintColor: Colors.white,
+        elevation: 2,
+      ),
+      actionIconTheme: ActionIconThemeData(
+        backButtonIconBuilder: (context) =>
+            SvgPicture.asset(AssetsManager.backButton),
+      ),
+      scaffoldBackgroundColor: Colors.white,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: ColorsManager.choosenColor,
+          splashColor: ColorsManager.choosenColor,
+          foregroundColor: Colors.white,
+          iconSize: 20,
+          shape: CircleBorder(side: BorderSide.none)),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        elevation: 1,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: ColorsManager.choosenColor,
+        // unselectedItemColor: Colors.grey
+      ),
+      // primaryColor: ColorsManager.choosenColor,
+      textSelectionTheme: TextSelectionThemeData(
+          cursorColor: ColorsManager.black,
+          selectionColor: ColorsManager.red,
+          selectionHandleColor: ColorsManager.red));
+}
